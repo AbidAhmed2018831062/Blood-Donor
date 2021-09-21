@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/AppName"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:text="Blood Donor"
+            android:textColor="#fff"
+            android:textSize="30dp"
+            android:background="#BF0000"
+            android:textStyle="bold"></TextView>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/AppName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-50dp"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="20dp"
+                android:background="@drawable/ba"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:hint="Enter Your Email"
+                    android:textColorHint="#000"
+                    app:boxStrokeColor="#000"
+                    app:startIconDrawable="@drawable/email"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#000"
+                    app:hintTextColor="#000"
+                    app:passwordToggleEnabled="true"
+                    app:startIconTint="#000"
+                    android:background="@drawable/backg">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:background="@drawable/str"
+                        android:padding="10dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        app:startIconDrawable="@drawable/lock"
+                        android:hint="Enter Password"
+                        android:textColorHint="#000"
+                        app:boxStrokeColor="#000"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:endIconMode="password_toggle"
+                        app:endIconTint="#000000"
+                        app:hintTextColor="#000"
+                        app:passwordToggleEnabled="true"
+                        app:startIconTint="#000">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/str"
+                            android:padding="10dp"
+                            android:textColor="#000" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        app:startIconDrawable="@drawable/lock"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Confirm Password"
+                        app:boxStrokeColor="#000"
+                        app:boxStrokeWidthFocused="2dp"
+
+                        app:endIconMode="password_toggle"
+                        app:endIconTint="#000000"
+                        app:hintTextColor="#000"
+                        app:passwordToggleEnabled="true"
+                        app:startIconTint="#000"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="#000">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/Cpassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:background="@drawable/str"
+                            android:textColor="#000" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <Button
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/button"
+                        android:text="Submit"
+                        android:id="@+id/submit"
+                        android:textColor="#fff"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:layout_marginBottom="20dp"></Button>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Nothing is more needed than blood in COVID times."
+    android:textAlignment="center"
+    android:layout_marginTop="30dp"
+    android:textStyle="bold"
+    android:textSize="20dp"
+    android:textColor="#BF0000"></TextView>
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
