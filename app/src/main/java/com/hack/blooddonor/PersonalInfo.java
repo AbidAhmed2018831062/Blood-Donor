@@ -169,7 +169,7 @@ Button cimg,submit;
                                                     HashMap t=new HashMap();
                                                     t.put("token",token);
                                                     HashMap iu=new HashMap();
-                                                    iu.put("token",t);
+                                                    iu.put("token",token);
                                                     Random rn=new Random();
                                                     long yh=rn.nextInt(10000000);
                                                     iu.put("name",na.getText().toString());

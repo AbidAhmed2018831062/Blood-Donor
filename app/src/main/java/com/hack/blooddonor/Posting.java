@@ -29,9 +29,12 @@ public class Posting extends AppCompatActivity {
 String bl[],di[],div[];
 ArrayAdapter<String> adapter;
 Spinner blood,division;
+String work,email,name,url,email1;
     AutoCompleteTextView district;
 EditText patient,phone,location,disease;
 Button submit;
+String de="";
+String gh1="";
     int year,cmonth,day,day1,cmonth1,year1;
     Calendar en= Calendar.getInstance();
     @Override
@@ -43,6 +46,7 @@ Button submit;
         bl=getResources().getStringArray(R.array.BloodTypes);
         di=getResources().getStringArray(R.array.districts);
         blood=(Spinner)findViewById(R.id.blood);
+        work=getIntent().getStringExtra("Work");
         district=(AutoCompleteTextView) findViewById(R.id.district);
         district.setThreshold(1);
         adapter = new ArrayAdapter<String>(Posting.this,
@@ -52,6 +56,17 @@ Button submit;
         div=getResources().getStringArray(R.array.divisions);
         ArrayAdapter<String> ar=new ArrayAdapter<String>(this, R.layout.education,R.id.Edu,bl);
         blood.setAdapter(ar);
+        SessionManager sh = new SessionManager(getApplicationContext(), SessionManager.USERSESSION);
+        HashMap<String, String> hm = sh.returnData();
+        email = hm.get(SessionManager.EMAIL);
+         name = hm.get(SessionManager.FULLNAME);
+         url = hm.get(SessionManager.URL);
+         email1 = "";
+        for (int i = 0; i < email.length(); i++) {
+            if (email.charAt(i) == '@')
+                break;
+            email1 += email.charAt(i);
+        }
         district.setAdapter(adapter);
         ArrayAdapter<String> ar2=new ArrayAdapter<String>(this, R.layout.education,R.id.Edu,div);
         division.setAdapter(ar2);
@@ -61,22 +76,59 @@ Button submit;
         disease=(EditText)findViewById(R.id.disease);
         submit=(Button)findViewById(R.id.submit);
         location=(EditText)findViewById(R.id.location);
+        if(work.equals("Edit"))
+        {
+            String date= getIntent().getStringExtra("Date");
+            String mo= getIntent().getStringExtra("Month");
+            FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Posts").child(mo).child(date).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String b1=snapshot.child("blood").getValue().toString();
+                    String d1=snapshot.child("district").getValue().toString();
+                    String di1=snapshot.child("division").getValue().toString();
+                    String p1=snapshot.child("phone").getValue().toString();
+                    String pa1=snapshot.child("patientName").getValue().toString();
+                    String l1=snapshot.child("location").getValue().toString();
+                    String er=snapshot.child("disease").getValue().toString();
+                 de=snapshot.child("date").getValue().toString();
+                 gh1=snapshot.child("gh").getValue().toString();
+                    if(b1.equals("A+"))
+                        blood.setSelection(0);
+                    else if(b1.equals("B+"))
+                        blood.setSelection(1);
+                    else if(b1.equals("AB+"))
+                        blood.setSelection(2);
+                    else if(b1.equals("O+"))
+                        blood.setSelection(3);
+                    else if(b1.equals("B-"))
+                        blood.setSelection(5);
+                    else if(b1.equals("A-"))
+                        blood.setSelection(4);
+                    else if(b1.equals("AB-"))
+                        blood.setSelection(6);
+                    else if(b1.equals("O-"))
+                        blood.setSelection(7);
+                    patient.setText(pa1);
+                    location.setText(l1);
+                    disease.setText(er);
+                    district.setText(d1);
+                    phone.setText(p1);
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String blood_type=blood.getSelectedItem().toString();
                 if(validatePhone()&&validateAddress()&&validateDisease()&&valodatePatient()) {
-                    SessionManager sh = new SessionManager(getApplicationContext(), SessionManager.USERSESSION);
-                    HashMap<String, String> hm = sh.returnData();
-                    String email = hm.get(SessionManager.EMAIL);
-                    String name = hm.get(SessionManager.FULLNAME);
-                    String url = hm.get(SessionManager.URL);
-                    String email1 = "";
-                    for (int i = 0; i < email.length(); i++) {
-                        if (email.charAt(i) == '@')
-                            break;
-                        email1 += email.charAt(i);
-                    }
+
 
 
                     Calendar cal = Calendar.getInstance();
@@ -110,8 +162,13 @@ Button submit;
                     Random rn=new Random();
                     long gh=rn.nextInt(10000000);  SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss");
                     String time=sdf.format(cal.getTime());
+                    PostingData pd;
+                   if(work.equals("Edit"))
+                        pd = new PostingData(blood_type, patient.getText().toString(), disease.getText().toString(),
+                               location.getText().toString(), phone.getText().toString(),de,url,name,email,district.getText().toString(),division.getSelectedItem().toString(),time,name,gh1);
 
-                    PostingData pd = new PostingData(blood_type, patient.getText().toString(), disease.getText().toString(),
+                   else
+                        pd = new PostingData(blood_type, patient.getText().toString(), disease.getText().toString(),
                             location.getText().toString(), phone.getText().toString(),cday + " " + month + " " + cy,url,name,email,district.getText().toString(),division.getSelectedItem().toString(),time,name,gh+"");
 
 
@@ -142,13 +199,15 @@ Button submit;
                                                 }
                                                 HashMap op=new HashMap();
                                                 op.put("Clicked","No");
-                                                NotiData nd = new NotiData(blood_type, patient.getText().toString(), disease.getText().toString(),
-                                                        location.getText().toString(), phone.getText().toString(),cday + " " + finalMonth1 + " " + cy,url,name,email,district.getText().toString(),"Urgent "+blood_type+" blood is needed at "+division.getSelectedItem().toString(),time,name,gh+"");
-                                                FirebaseDatabase.getInstance().getReference("Users").child(ema).child("Clicked").child(cday + " " + finalMonth + " " + cy+" "+time).setValue(op);
-                                                FirebaseDatabase.getInstance().getReference("Users").child(ema).child("Notifications").
-                                                        child(cday + " " + finalMonth + " " + cy+" "+time).setValue(nd);
-                                              //  Toast.makeText(getApplicationContext(),dn.getToken(),Toast.LENGTH_LONG).show();
-                                            FcmNotificationsSender fcm = new FcmNotificationsSender(dn.getToken(), "Blood Needed", blood_type+" blood is needed at "+
+                                                NotiData nd;
+                                                if(work.equals("Edit"))
+                                                nd = new NotiData(blood_type, patient.getText().toString(), disease.getText().toString(),
+                                                        location.getText().toString(), phone.getText().toString(),de,url,name,email,district.getText().toString(),"Urgent "+blood_type+" blood is needed at "+division.getSelectedItem().toString(),time,name,gh1);
+                                            else
+                                                    nd = new NotiData(blood_type, patient.getText().toString(), disease.getText().toString(),
+                                                            location.getText().toString(), phone.getText().toString(),cday+" "+finalMonth+" "+cy,url,name,email,district.getText().toString(),"Urgent "+blood_type+" blood is needed at "+division.getSelectedItem().toString(),time,name,gh+"");
+
+                                                FcmNotificationsSender fcm = new FcmNotificationsSender(dn.getToken(), "Blood Needed", blood_type+" blood is needed at "+
                                                     location.getText().toString()+", "+district.getText().toString(), getApplicationContext(), Posting.this);
                                            // Toast.makeText(getApplicationContext(), dn.getToken(), Toast.LENGTH_LONG).show();
                                             fcm.SendNotifications();
@@ -168,12 +227,22 @@ Button submit;
 
                         }
                     });
+                    if(work.equals("Edit"))
+                    {
+                        String date= getIntent().getStringExtra("Date");
+                        String mo= getIntent().getStringExtra("Month");
+                        FirebaseDatabase.getInstance().getReference("Posts").child(mo).child(date).setValue(pd);
+                        FirebaseDatabase.getInstance().getReference("PostsDi").child(district.getText().toString()).child(mo).child(date).setValue(pd);
+                        FirebaseDatabase.getInstance().getReference("PostsDi").child(division.getSelectedItem().toString()).child(mo).child(date).setValue(pd);
+                        FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Posts").child(mo).child(date).setValue(pd);
+                    }
+                    else {
+                        FirebaseDatabase.getInstance().getReference("Posts").child(month).child(cday + " " + month + " " + cy + " " + gh).setValue(pd);
+                        FirebaseDatabase.getInstance().getReference("PostsDi").child(district.getText().toString()).child(month).child(cday + " " + month + " " + cy + " " + gh).setValue(pd);
+                        FirebaseDatabase.getInstance().getReference("PostsDi").child(division.getSelectedItem().toString()).child(month).child(cday + " " + month + " " + cy + " " + gh).setValue(pd);
+                        FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Posts").child(month).child(cday + " " + month + " " + cy + " " + gh).setValue(pd);
 
-                    FirebaseDatabase.getInstance().getReference("Posts").child(month).child(cday + " " + month + " " + cy+" "+gh).setValue(pd);
-                    FirebaseDatabase.getInstance().getReference("PostsDi").child(district.getText().toString()).child(month).child(cday + " " + month + " " + cy+" "+gh).setValue(pd);
-                    FirebaseDatabase.getInstance().getReference("PostsDi").child(division.getSelectedItem().toString()).child(month).child(cday + " " + month + " " + cy+" "+gh).setValue(pd);
-                    FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Posts").child(month).child(cday + " " + month + " " + cy+" "+gh).setValue(pd);
-                   startActivity(new Intent(getApplicationContext(),PostsandWatch.class));
+                    }startActivity(new Intent(getApplicationContext(),PostsandWatch.class));
                    finish();
                 }
             }

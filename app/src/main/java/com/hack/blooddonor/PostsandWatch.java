@@ -107,7 +107,7 @@ PostsAdapter post;
            @Override
            public void onClick(View view) {
 
-                         startActivity(new Intent(getApplicationContext(),Posting.class));
+                         startActivity(new Intent(getApplicationContext(),Posting.class).putExtra("Work","No"));
                          finish();
            }
        });
