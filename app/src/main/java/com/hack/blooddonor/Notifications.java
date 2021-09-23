@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,12 +24,20 @@ public class Notifications extends AppCompatActivity {
 RecyclerView noti;
 NotiAdapter adapter;
 String email;
+ImageView back;
 List<NotiData> list=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
         noti=(RecyclerView)findViewById(R.id.noti);
+        back=(ImageView)findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 noti.setLayoutManager(new LinearLayoutManager(this));
 adapter=new NotiAdapter(this,list);
 noti.setAdapter(adapter);

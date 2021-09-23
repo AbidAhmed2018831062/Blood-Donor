@@ -72,9 +72,9 @@ public class DonorReg extends AppCompatActivity {
                         email1 += email.charAt(i);
                     }
                     HashMap pu=new HashMap();
-                    pu.put("phone",phone1);
+                    pu.put("Phone",phone1);
                     pu.put("Division",div);
-                    pu.put("District",div);
+                    pu.put("District",dis);
                     FirebaseDatabase.getInstance().getReference("Users").child(email1).
                             updateChildren(pu);
                     Random rn=new Random();
@@ -90,7 +90,9 @@ public class DonorReg extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference("Donor").child(blood.getSelectedItem().toString()).
                             child(pk+"").setValue(email1);
                     FirebaseDatabase.getInstance().getReference("Donors").child(email1).setValue(d);
-                    FirebaseDatabase.getInstance().getReference("Donor").child(blood.getSelectedItem().toString()).child(email).setValue(d);
+                    char bl=blood.getSelectedItem().toString().charAt(0);
+                    String bl1=bl+"plus";
+                   // FirebaseDatabase.getInstance().getReference("Donor").child(bl1).setValue(d);
                     Toast.makeText(getApplicationContext(),"You have successfully registered as a blood donor.",Toast.LENGTH_LONG).show();
 
                     startActivity(new Intent(getApplicationContext(),PostsandWatch.class));

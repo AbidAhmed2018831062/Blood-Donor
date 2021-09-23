@@ -126,30 +126,54 @@ PostsAdapter post;
         int cday = cal.get(Calendar.DAY_OF_MONTH);
         int cmonth = cal.get(Calendar.MONTH);
         int cy = cal.get(Calendar.YEAR);
-        String month = "";
-        if (cmonth == 1 - 1)
+        String month = "",cm1="";
+        if (cmonth == 1 - 1) {
             month = "January";
-        else if (cmonth == 2 - 1)
+            cm1 = "December";
+        }
+        else if (cmonth == 2 - 1) {
             month = "February";
-        else if (cmonth == 3 - 1)
+        cm1="January";
+        }
+        else if (cmonth == 3 - 1) {
             month = "March";
-        else if (cmonth == 4 - 1)
+            cm1="February";
+        }
+        else if (cmonth == 4 - 1) {
             month = "April";
-        else if (cmonth == 5 - 1)
+            cm1="March";
+        }
+        else if (cmonth == 5 - 1) {
             month = "May";
-        else if (cmonth == 6 - 1)
+            cm1="April";
+        }else if (cmonth == 6 - 1) {
             month = "June";
-        else if (cmonth == 7 - 1)
+            cm1 = "May";
+        }
+        else if (cmonth == 7 - 1) {
             month = "July";
-        else if (cmonth == 8 - 1)
+            cm1 = "June";
+        }
+        else if (cmonth == 8 - 1) {
             month = "August";
-        else if (cmonth == 9 - 1)
+            cm1 = "July";
+        }
+        else if (cmonth == 9 - 1) {
             month = "September";
-        else if (cmonth == 10 - 1)
+            cm1 = "August";
+        }
+        else if (cmonth == 10 - 1) {
             month = "October";
-        else if (cmonth == 11 - 1)
+            cm1 = "September";
+        }
+        else if (cmonth == 11 - 1) {
             month = "November";
-        else month = "December";
+            cm1 = "November";
+        }
+        else {
+            month = "December";
+            cm1 = "November";
+        }
         String finalMonth = month;
         FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Posts").child(month).addValueEventListener(new ValueEventListener() {
             @Override
@@ -197,6 +221,67 @@ PostsAdapter post;
                 {
                     PostingData pd=s.getValue(PostingData.class);
               //      Toast.makeText(getApplicationContext(), dis,Toast.LENGTH_LONG).show();
+
+
+                    if(pd.getEmail().equals(email)||pd.getDistrict().equals(dis))
+                        continue;
+                    list.add(pd);
+                }
+                post.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Posts").child(cm1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ///  list.clear();
+                for(DataSnapshot s:snapshot.getChildren())
+                {
+                    // Toast.makeText(getApplicationContext(), finalMonth,Toast.LENGTH_LONG).show();
+                    PostingData pd=s.getValue(PostingData.class);
+                    list.add(pd);
+                }
+
+                post.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        FirebaseDatabase.getInstance().getReference("PostsDi").child(dis).child(cm1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot s:snapshot.getChildren())
+                {
+                    //      Toast.makeText(getApplicationContext(), "Abid",Toast.LENGTH_LONG).show();
+                    PostingData pd=s.getValue(PostingData.class);
+                    if(pd.getEmail().equals(email))
+                        continue;
+                    list.add(pd);
+                }
+                post.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        FirebaseDatabase.getInstance().getReference("PostsDi").child(div).child(cm1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot s:snapshot.getChildren())
+                {
+                    PostingData pd=s.getValue(PostingData.class);
+                    //      Toast.makeText(getApplicationContext(), dis,Toast.LENGTH_LONG).show();
 
 
                     if(pd.getEmail().equals(email)||pd.getDistrict().equals(dis))
