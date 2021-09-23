@@ -47,8 +47,6 @@ Button cimg,submit;
     StorageReference st;
     int count=1;
     String di[],div[];
-    Spinner division;
-    AutoCompleteTextView district;
     ArrayAdapter<String> adapter;
     int d=0;
     StorageTask uploadtask;
@@ -59,19 +57,6 @@ Button cimg,submit;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_personal_info);
-        district=(AutoCompleteTextView) findViewById(R.id.district);
-        di=getResources().getStringArray(R.array.districts);
-        district.setThreshold(1);
-        adapter = new ArrayAdapter<String>(PersonalInfo.this,
-                R.layout.education, di);
-        district.setAdapter(adapter);
-        division=(Spinner)findViewById(R.id.division);
-
-        div=getResources().getStringArray(R.array.divisions);
-        ArrayAdapter<String> a1r=new ArrayAdapter<String>(this, R.layout.education,R.id.Edu,di);
-        district.setAdapter(a1r);
-        ArrayAdapter<String> ar2=new ArrayAdapter<String>(this, R.layout.education,R.id.Edu,div);
-        division.setAdapter(ar2);
         na=(EditText)findViewById(R.id.name);
         pho=(EditText)findViewById(R.id.phone);
         st= FirebaseStorage.getInstance().getReference("Upload");
@@ -148,9 +133,6 @@ Button cimg,submit;
                                 HashMap mp=new HashMap();
                                 mp.put("Name",na.getText().toString());
                                 mp.put("Phone",pho.getText().toString());
-                                mp.put("Url",url);
-                                mp.put("District",district.getText().toString());
-                                mp.put("Division",division.getSelectedItem().toString());
                                 String email1="";
                                 for(int i=0;i<email.length();i++)
                                 {
@@ -175,7 +157,7 @@ Button cimg,submit;
                                                     iu.put("name",na.getText().toString());
                                                     FirebaseDatabase.getInstance().getReference("Names").child(yh+"").updateChildren(iu);
                                                     SessionManager sh=new SessionManager(PersonalInfo.this,SessionManager.USERSESSION);
-                                                    sh.loginSession(na.getText().toString(),email,pho.getText().toString(),pass,url,"No",token,division.getSelectedItem().toString(),district.getText().toString());
+                                                    sh.loginSession(na.getText().toString(),email,pho.getText().toString(),pass,url,"No",token,"No","No");
                                                     FirebaseDatabase.getInstance().getReference("Users").child(finalEmail).child("Tokens").updateChildren(t);
                                                     startActivity(new Intent(getApplicationContext(),PostsandWatch.class));
                                                     finish();

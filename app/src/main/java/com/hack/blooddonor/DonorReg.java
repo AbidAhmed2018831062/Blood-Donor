@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -20,6 +21,9 @@ public class DonorReg extends AppCompatActivity {
     Spinner blood;
     String bl[],di[],div[];
     EditText phone;
+    Spinner division;
+    AutoCompleteTextView district;
+    ArrayAdapter<String> adapter;
     Button submit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +33,25 @@ public class DonorReg extends AppCompatActivity {
         bl=getResources().getStringArray(R.array.BloodTypes);
         ArrayAdapter<String> ar=new ArrayAdapter<String>(this, R.layout.education,R.id.Edu,bl);
         blood.setAdapter(ar);
+        district=(AutoCompleteTextView) findViewById(R.id.district);
+        di=getResources().getStringArray(R.array.districts);
+        district.setThreshold(1);
+        adapter = new ArrayAdapter<String>(DonorReg.this,
+                R.layout.education, di);
+        district.setAdapter(adapter);
+        division=(Spinner)findViewById(R.id.division);
+
+        div=getResources().getStringArray(R.array.divisions);
+        ArrayAdapter<String> a1r=new ArrayAdapter<String>(this, R.layout.education,R.id.Edu,di);
+        district.setAdapter(a1r);
+        ArrayAdapter<String> ar2=new ArrayAdapter<String>(this, R.layout.education,R.id.Edu,div);
+        division.setAdapter(ar2);
         phone=(EditText)findViewById(R.id.phone);
         submit=(Button)findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (phone.getText().toString().length() == 11) {
+                if (phone.getText().toString().length() == 11&&!district.getText().toString().equals("")) {
                     SessionManager sh2 = new SessionManager(getApplicationContext(), SessionManager.USERSESSION);
 
                     SessionManager sh = new SessionManager(getApplicationContext(), SessionManager.USERSESSION);
@@ -43,10 +60,10 @@ public class DonorReg extends AppCompatActivity {
                     String token = hm.get(SessionManager.TOKEN);
                     String name = hm.get(SessionManager.FULLNAME);
                     String url = hm.get(SessionManager.URL);
-                    String phone1 = hm.get(SessionManager.PHONE);
+                    String phone1 = phone.getText().toString();
                     String pass = hm.get(SessionManager.PASS);
-                    String dis = hm.get(SessionManager.DISTRICT);
-                    String div = hm.get(SessionManager.DIVISION);
+                    String dis = district.getText().toString();
+                    String div = division.getSelectedItem().toString();
                     String email1 = "";
                     sh2.loginSession(name,email,phone1,pass,url,"Yes",token,div,dis);
                     for (int i = 0; i < email.length(); i++) {
@@ -54,6 +71,12 @@ public class DonorReg extends AppCompatActivity {
                             break;
                         email1 += email.charAt(i);
                     }
+                    HashMap pu=new HashMap();
+                    pu.put("phone",phone1);
+                    pu.put("Division",div);
+                    pu.put("District",div);
+                    FirebaseDatabase.getInstance().getReference("Users").child(email1).
+                            updateChildren(pu);
                     Random rn=new Random();
                     long pk=rn.nextInt(10000000);
 

@@ -79,59 +79,7 @@
             android:background="@drawable/str"
             android:padding="10dp"/>
     </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Select District: "
-                android:textSize="16sp"
-                android:textStyle="bold"
 
-                android:layout_marginTop="20dp"
-                android:textColor="#000"></TextView>
-            <AutoCompleteTextView
-                android:id="@+id/district"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:completionHint="Select a country"
-                android:completionThreshold="1"
-                android:layout_weight="2"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/str"
-                android:padding="10dp"
-                android:hint="Select a District"
-                android:textColor="#000" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Select Division:"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:layout_marginTop="20dp"
-                android:textColor="#000"></TextView>
-            <Spinner
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:id="@+id/division"></Spinner>
-        </LinearLayout>
     <Button
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
