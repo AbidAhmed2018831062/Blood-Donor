@@ -57,7 +57,7 @@ String phone2;
             finish();
         } else {
 //            Toast.makeText(getApplicationContext(),phone2+"Abid",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(getApplicationContext(), PostsandWatch.class));
+            startActivity(new Intent(getApplicationContext(), OwnerProfile.class));
             finish();
         }
     }

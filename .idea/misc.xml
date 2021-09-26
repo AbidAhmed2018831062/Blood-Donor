@@ -4,9 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/BloodDonor/app/src/main/res/drawable/bottombackground.xml" value="0.14635416666666667" />
+        <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_add_medicine.xml" value="0.13020833333333334" />
+        <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_aksing.xml" value="0.21195652173913043" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_donor_reg.xml" value="0.1" />
+        <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_med_adapter.xml" value="0.21195652173913043" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_notifications.xml" value="0.1" />
+        <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_owner_profile.xml" value="0.11658291457286432" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_personal_info.xml" value="0.15217391304347827" />
+        <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_posting.xml" value="0.14175724637681159" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/bottomsheet.xml" value="0.13020833333333334" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/comments.xml" value="0.1539855072463768" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/posts.xml" value="0.264" />

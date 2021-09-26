@@ -157,7 +157,7 @@ Button cimg,submit;
                                                     iu.put("name",na.getText().toString());
                                                     FirebaseDatabase.getInstance().getReference("Names").child(yh+"").updateChildren(iu);
                                                     SessionManager sh=new SessionManager(PersonalInfo.this,SessionManager.USERSESSION);
-                                                    sh.loginSession(na.getText().toString(),email,pho.getText().toString(),pass,url,"No",token,"No","No");
+                                                    sh.loginSession(na.getText().toString(),email,pho.getText().toString(),pass,url,"No",token,"No","No","Normal");
                                                     FirebaseDatabase.getInstance().getReference("Users").child(finalEmail).child("Tokens").updateChildren(t);
                                                     startActivity(new Intent(getApplicationContext(),PostsandWatch.class));
                                                     finish();

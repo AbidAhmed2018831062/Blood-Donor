@@ -20,7 +20,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Comment"></activity>
+        <activity
+            android:name=".OwnerProfile"
+            android:exported="true" />
+        <activity
+            android:name=".AddMedicine"
+            android:exported="true" />
+        <activity
+            android:name=".Aksing"
+            android:exported="true" />
+        <activity android:name=".Comment" />
         <activity android:name=".ShowPosts" />
         <activity android:name=".Notifications" />
         <activity android:name=".ShowDonors" />

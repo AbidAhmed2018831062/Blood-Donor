@@ -25,7 +25,7 @@ public class SessionManager {
     public static final String TOKEN = "TOKEN";
     public static final String DIVISION = "DIVISION";
     public static final String DISTRICT = "DISTRICT";
-
+    public static final String WHAT = "WHAT";
 
 
     public static final String ISREMEMBERME = "REMEMBERME";
@@ -38,7 +38,7 @@ public class SessionManager {
         ed = sh.edit();
     }
 
-    public void loginSession(String fullname, String email, String phone, String pass,String url,String donor,String token,String division,String district) {
+    public void loginSession(String fullname, String email, String phone, String pass,String url,String donor,String token,String division,String district, String what) {
 
         ed.putBoolean(ISLOGGED, true);
 
@@ -51,6 +51,7 @@ public class SessionManager {
         ed.putString(TOKEN, token);
         ed.putString(DIVISION, division);
         ed.putString(DISTRICT, district);
+        ed.putString(WHAT, what);
         ed.commit();
     }
 
@@ -65,6 +66,7 @@ public class SessionManager {
         hm.put(TOKEN, sh.getString(TOKEN, null));
         hm.put(DISTRICT, sh.getString(DISTRICT, null));
         hm.put(DIVISION, sh.getString(DIVISION, null));
+        hm.put(WHAT, sh.getString(WHAT, null));
 
         return hm;
     }
