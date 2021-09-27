@@ -21,6 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ShowResults"
+            android:exported="true" />
+        <activity
+            android:name=".User_Section"
+            android:exported="true" />
+        <activity
             android:name=".OwnerProfile"
             android:exported="true" />
         <activity

@@ -51,15 +51,36 @@ String phone2;
         SessionManager sh=new SessionManager(getApplicationContext(),SessionManager.USERSESSION);
         HashMap<String,String> hm=sh.returnData();
         phone2=hm.get(SessionManager.EMAIL);
+        String BNAME=hm.get(SessionManager.BNAME);
+        String t=hm.get(SessionManager.WHAT);
         if (phone2 == null || phone2.isEmpty()) {
          //     Toast.makeText(getApplicationContext(),phone2+"Abid",Toast.LENGTH_LONG).show();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         } else {
-//            Toast.makeText(getApplicationContext(),phone2+"Abid",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(getApplicationContext(), OwnerProfile.class));
-            finish();
+
+              if(t.equals("NormalUser")) {
+                  startActivity(new Intent(getApplicationContext(), User_Section.class));
+                  finish();
+              }
+              else if(t.equals("Normal"))
+              {
+                  startActivity(new Intent(getApplicationContext(), Aksing.class));
+                  finish();
+              }
+          else{
+            if (BNAME.equals("No")) {
+                startActivity(new Intent(getApplicationContext(), AddMedicine.class));
+                finish();
+            }
+            else
+            {
+                startActivity(new Intent(getApplicationContext(), OwnerProfile.class));
+                finish();
+            }
         }
-    }
+
+
+    }}
 
 }

@@ -1,7 +1,7 @@
 package com.hack.blooddonor;
 
 public class Med {
-    String mname,price,type,disease,ran,name,address,URL;
+    String mname,price,type,disease,ran,name,address,URL,des,qua;
 public Med()
 {}
 
@@ -17,11 +17,27 @@ public Med()
         return address;
     }
 
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
+    }
+
+    public String getQua() {
+        return qua;
+    }
+
+    public void setQua(String qua) {
+        this.qua = qua;
+    }
+
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public Med(String mname, String price, String type, String disease, String ran, String name, String address,String URL) {
+    public Med(String mname, String price, String type, String disease, String ran, String name, String address,String URL,String des,String qua) {
         this.mname = mname;
         this.price = price;
         this.type = type;
@@ -30,6 +46,8 @@ public Med()
         this.name = name;
         this.address = address;
         this.URL = URL;
+        this.des = des;
+        this.qua = qua;
     }
 
     public String getURL() {

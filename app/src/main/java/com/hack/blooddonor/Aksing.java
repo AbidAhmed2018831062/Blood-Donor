@@ -36,14 +36,15 @@ String email,name,div,dis,url,phone,donor,token,pass;
         normal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sh2.loginSession(name,email,phone,pass,url,donor,token,div,dis,"NormalUser");
+                sh2.loginSession(name,email,phone,pass,url,donor,token,div,dis,"NormalUser","No");
+                startActivity(new Intent(getApplicationContext(),User_Section.class));
             }
         });
         owner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                sh2.loginSession(name,email,phone,pass,url,donor,token,div,dis,"Owner");
+                sh2.loginSession(name,email,phone,pass,url,donor,token,div,dis,"Owner","No");
                 String email1="";
                 for(int i=0;i<email.length();i++)
                 {
