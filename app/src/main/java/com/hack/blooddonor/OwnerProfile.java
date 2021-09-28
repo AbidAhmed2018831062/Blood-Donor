@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +24,9 @@ import java.util.List;
 
 public class OwnerProfile extends AppCompatActivity {
 RecyclerView rco,rwo,rde,rho,rnu,rvi,rhe,rca,rdi,rpn,rme,rot;
-TextView co,wo,de,ho,nu,vi,he,ca,dia,pn,me,ot;
+GridView RAll;
+GridAdapter m1;
+TextView co,wo,de,ho,nu,vi,he,ca,dia,pn,me,ot,All;
 Button add;
 List<Med> list=new ArrayList<>();
 List<Med> list1=new ArrayList<>();
@@ -47,6 +51,7 @@ String email,email1="";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_profile);
         co=(TextView) findViewById(R.id.co);
+        All=(TextView) findViewById(R.id.All);
         add=(Button) findViewById(R.id.add);
         wo=(TextView) findViewById(R.id.wo);
         de=(TextView) findViewById(R.id.de);
@@ -61,6 +66,7 @@ String email,email1="";
         dia=(TextView) findViewById(R.id.dia);
         rco=(RecyclerView) findViewById(R.id.rco);
         rhe=(RecyclerView) findViewById(R.id.rhe);
+        RAll=(GridView) findViewById(R.id.RAll);
         rwo=(RecyclerView) findViewById(R.id.rwo);
         rde=(RecyclerView) findViewById(R.id.rde);
         rme=(RecyclerView) findViewById(R.id.rme);
@@ -92,12 +98,13 @@ add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
+                    list.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Med me = ds.getValue(Med.class);
                         list.add(me);
                     }
                     rco.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list);
+                    m=new MedAdapter(OwnerProfile.this,list);
                     rco.setAdapter(m);
                 }
                 else
@@ -122,7 +129,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list1.add(me);
                     }
                     rwo.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list1);
+                    m=new MedAdapter(OwnerProfile.this,list1);
                     rwo.setAdapter(m);
                 }
                 else
@@ -147,7 +154,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list2.add(me);
                     }
                     rde.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list2);
+                    m=new MedAdapter(OwnerProfile.this,list2);
                     rde.setAdapter(m);
                 }
                 else
@@ -172,7 +179,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list3.add(me);
                     }
                     rho.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list2);
+                    m=new MedAdapter(OwnerProfile.this,list3);
                     rho.setAdapter(m);
                 }
                 else
@@ -197,7 +204,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list4.add(me);
                     }
                     rnu.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list4);
+                    m=new MedAdapter(OwnerProfile.this,list4);
                     rnu.setAdapter(m);
                 }
                 else
@@ -222,7 +229,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list5.add(me);
                     }
                     rvi.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list5);
+                    m=new MedAdapter(OwnerProfile.this,list5);
                     rvi.setAdapter(m);
                 }
                 else
@@ -247,7 +254,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list6.add(me);
                     }
                     rhe.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list6);
+                    m=new MedAdapter(OwnerProfile.this,list6);
                     rhe.setAdapter(m);
                 }
                 else
@@ -272,7 +279,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list7.add(me);
                     }
                     rca.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list7);
+                    m=new MedAdapter(OwnerProfile.this,list7);
                     rca.setAdapter(m);
                 }
                 else
@@ -297,7 +304,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list8.add(me);
                     }
                     rdi.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list8);
+                    m=new MedAdapter(OwnerProfile.this,list8);
                     rdi.setAdapter(m);
                 }
                 else
@@ -347,7 +354,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list10.add(me);
                     }
                     rme.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list10);
+                    m=new MedAdapter(OwnerProfile.this,list10);
                     rme.setAdapter(m);
                 }
                 else
@@ -372,7 +379,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list11.add(me);
                     }
                     rot.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list11);
+                    m=new MedAdapter(OwnerProfile.this,list11);
                     rot.setAdapter(m);
                 }
                 else
@@ -384,6 +391,36 @@ add.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        FirebaseDatabase.getInstance().getReference("All").child(email1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()) {
+                    list15.clear();
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Med me = ds.getValue(Med.class);
+                        list15.add(me);
+                    }
+                  m1=new GridAdapter(OwnerProfile.this,list15);
+                    RAll.setAdapter(m1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        RAll.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(getApplicationContext(),ShowProduct.class).putExtra("Url",list.get(i).getURL()
+                ).putExtra("Name",list.get(i).getName()).putExtra("Mname",list.get(i).getMname()).
+                        putExtra("Qua",list.get(i).getQua()).putExtra("Des",list.get(i).getDes()).
+                        putExtra("Dis",list.get(i).getDisease()).putExtra("Ran",list.get(i).getRan()).putExtra("Price",list.get(i).getPrice()));
 
             }
         });

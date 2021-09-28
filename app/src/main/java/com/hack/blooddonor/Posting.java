@@ -47,15 +47,7 @@ String gh1="";
         di=getResources().getStringArray(R.array.districts);
         blood=(Spinner)findViewById(R.id.blood);
         work=getIntent().getStringExtra("Work");
-        district=(AutoCompleteTextView) findViewById(R.id.district);
-        district.setThreshold(1);
-        adapter = new ArrayAdapter<String>(Posting.this,
-                android.R.layout.simple_list_item_1, di);
-        district.setAdapter(adapter);
-        division=(Spinner)findViewById(R.id.division);
-        div=getResources().getStringArray(R.array.divisions);
-        ArrayAdapter<String> ar=new ArrayAdapter<String>(this, R.layout.education,R.id.Edu,bl);
-        blood.setAdapter(ar);
+
         SessionManager sh = new SessionManager(getApplicationContext(), SessionManager.USERSESSION);
         HashMap<String, String> hm = sh.returnData();
         email = hm.get(SessionManager.EMAIL);
@@ -67,10 +59,18 @@ String gh1="";
                 break;
             email1 += email.charAt(i);
         }
+        district=(AutoCompleteTextView) findViewById(R.id.district);
+        district.setThreshold(1);
+        adapter = new ArrayAdapter<String>(Posting.this,
+                android.R.layout.simple_list_item_1, di);
+        district.setAdapter(adapter);
+        division=(Spinner)findViewById(R.id.division);
+        div=getResources().getStringArray(R.array.divisions);
+        ArrayAdapter<String> ar=new ArrayAdapter<String>(this, R.layout.education,R.id.Edu,bl);
+        blood.setAdapter(ar);
         district.setAdapter(adapter);
         ArrayAdapter<String> ar2=new ArrayAdapter<String>(this, R.layout.education,R.id.Edu,div);
         division.setAdapter(ar2);
-        blood=(Spinner)findViewById(R.id.blood);
         patient=(EditText)findViewById(R.id.patient);
         phone=(EditText)findViewById(R.id.phone);
         disease=(EditText)findViewById(R.id.disease);

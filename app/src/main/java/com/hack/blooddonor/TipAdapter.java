@@ -37,6 +37,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.Tips> {
         //Toast.makeText(c,na[i],Toast.LENGTH_LONG).show();
         holder.he.setText(na[i]);
 
+
     }
 
     @Override

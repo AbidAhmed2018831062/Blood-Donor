@@ -21,6 +21,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".TakeAddress"
+            android:exported="true" />
+        <activity
+            android:name=".Proceed"
+            android:exported="true" />
+        <activity
+            android:name=".ShowProduct"
+            android:exported="true" />
+        <activity
             android:name=".ShowResults"
             android:exported="true" />
         <activity

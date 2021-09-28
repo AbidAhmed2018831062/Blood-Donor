@@ -185,10 +185,6 @@ public class AddMedicine extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference("Medicines").child(disease.getSelectedItem().toString()).child(op+"").setValue(med);
                     FirebaseDatabase.getInstance().getReference("AllMedicines").child(op+"").setValue(med);
                     FirebaseDatabase.getInstance().getReference("All").child(email1).child(op+"").setValue(med);
-                    HashMap po=new HashMap();
-                    po.put("ran"+op,op+"");
-                    FirebaseDatabase.getInstance().getReference("MedicineNames").updateChildren(po);
-
                 }
 
             }

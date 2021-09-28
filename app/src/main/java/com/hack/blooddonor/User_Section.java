@@ -11,10 +11,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,74 +26,119 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class User_Section extends AppCompatActivity {
-    RecyclerView rco,rwo,rde,rho,rnu,rvi,rhe,rca,rdi,rpn,rme,rot,tip;
-    TextView co,wo,de,ho,nu,vi,he,ca,dia,pn,me,ot;
+    RecyclerView rco, rwo, rde, rho, rnu, rvi, rhe, rca, rdi, rpn, rme, rot, tip;
+    GridView RAll;
+    TextView co, wo, de, ho, nu, vi, he, ca, dia, pn, me, ot, count, All;
+    RelativeLayout scart;
     EditText se;
-    ImageView search;
+    ImageView search, cart;
+    GridAdapter m1;
     Button add;
-    List<Med> list=new ArrayList<>();
-    List<Med> list1=new ArrayList<>();
-    List<Med> list2=new ArrayList<>();
-    List<Med> list3=new ArrayList<>();
-    List<Med> list4=new ArrayList<>();
-    List<Med> list5=new ArrayList<>();
-    List<Med> list6=new ArrayList<>();
-    List<Med> list7=new ArrayList<>();
-    List<Med> list8=new ArrayList<>();
-    List<Med> list9=new ArrayList<>();
-    List<Med> list10=new ArrayList<>();
-    List<Med> list11=new ArrayList<>();
-    List<Med> list12=new ArrayList<>();
-    List<Med> list13=new ArrayList<>();
-    List<Med> list14=new ArrayList<>();
-    List<Med> list15=new ArrayList<>();
+    List<Med> list = new ArrayList<>();
+    List<Med> list1 = new ArrayList<>();
+    List<Med> list2 = new ArrayList<>();
+    List<Med> list3 = new ArrayList<>();
+    List<Med> list4 = new ArrayList<>();
+    List<Med> list5 = new ArrayList<>();
+    List<Med> list6 = new ArrayList<>();
+    List<Med> list7 = new ArrayList<>();
+    List<Med> list8 = new ArrayList<>();
+    List<Med> list9 = new ArrayList<>();
+    List<Med> list10 = new ArrayList<>();
+    List<Med> list11 = new ArrayList<>();
+    List<Med> list12 = new ArrayList<>();
+    List<Med> list13 = new ArrayList<>();
+    List<Med> list14 = new ArrayList<>();
+    List<Med> list15 = new ArrayList<>();
     MedAdapter m;
-    String email,email1="";
-    int img[]={R.drawable.covid19,R.drawable.women,R.drawable.device,R.drawable.homeo,R.drawable.nut,R.drawable.vita,R.drawable.he
-    ,R.drawable.can,R.drawable.dia,R.drawable.pne,R.drawable.ment,R.drawable.ment,R.drawable.oth};
+    String email, email1 = "",url,name;
+    int img[] = {R.drawable.covid19, R.drawable.women, R.drawable.device, R.drawable.homeo, R.drawable.nut, R.drawable.vita, R.drawable.he
+            , R.drawable.can, R.drawable.dia, R.drawable.pne, R.drawable.ment, R.drawable.ment, R.drawable.oth};
 
     TipAdapter ta;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_user_section);
-        co=(TextView) findViewById(R.id.co);
-        se=(EditText) findViewById(R.id.se);
-        search=(ImageView) findViewById(R.id.search);
-        add=(Button) findViewById(R.id.add);
-        String na[]=getResources().getStringArray(R.array.What);
-        wo=(TextView) findViewById(R.id.wo);
-        de=(TextView) findViewById(R.id.de);
-        ho=(TextView) findViewById(R.id.ho);
-        nu=(TextView) findViewById(R.id.nu);
-        ot=(TextView) findViewById(R.id.ot);
-        pn=(TextView) findViewById(R.id.pn);
-        he=(TextView) findViewById(R.id.he);
-        ca=(TextView) findViewById(R.id.ca);
-        vi=(TextView) findViewById(R.id.vi);
-        me=(TextView) findViewById(R.id.me);
-        dia=(TextView) findViewById(R.id.dia);
-        rco=(RecyclerView) findViewById(R.id.rco);
-        tip=(RecyclerView) findViewById(R.id.tip);
-        rhe=(RecyclerView) findViewById(R.id.rhe);
-        rwo=(RecyclerView) findViewById(R.id.rwo);
-        rde=(RecyclerView) findViewById(R.id.rde);
-        rme=(RecyclerView) findViewById(R.id.rme);
-        rho=(RecyclerView) findViewById(R.id.rho);
-        rpn=(RecyclerView) findViewById(R.id.rpn);
-        rnu=(RecyclerView) findViewById(R.id.rnu);
-        rot=(RecyclerView) findViewById(R.id.rot);
-        rca=(RecyclerView) findViewById(R.id.rca);
-        rvi=(RecyclerView) findViewById(R.id.rvi);
-        rdi=(RecyclerView) findViewById(R.id.rdi);
-        ta=new TipAdapter(getApplicationContext(),img,na);
-        tip.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        co = (TextView) findViewById(R.id.co);
+        All = (TextView) findViewById(R.id.All);
+        count = (TextView) findViewById(R.id.count);
+        scart = (RelativeLayout) findViewById(R.id.scart);
+        se = (EditText) findViewById(R.id.se);
+        search = (ImageView) findViewById(R.id.search);
+        cart = (ImageView) findViewById(R.id.cart);
+        add = (Button) findViewById(R.id.add);
+        SessionManager sh = new SessionManager(getApplicationContext(), SessionManager.USERSESSION);
+        HashMap<String, String> hm = sh.returnData();
+        email = hm.get(SessionManager.EMAIL);
+        name = hm.get(SessionManager.FULLNAME);
+        url = hm.get(SessionManager.URL);
+        email1 = "";
+        for (int i = 0; i < email.length(); i++) {
+            if (email.charAt(i) == '@')
+                break;
+            email1 += email.charAt(i);
+        }
+        scart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!count.getText().toString().equals("0"))
+                {
+                    startActivity(new Intent(getApplicationContext(),TakeAddress.class));
+                }
+            }
+        });
+        String na[] = getResources().getStringArray(R.array.What);
+        wo = (TextView) findViewById(R.id.wo);
+        de = (TextView) findViewById(R.id.de);
+        ho = (TextView) findViewById(R.id.ho);
+        nu = (TextView) findViewById(R.id.nu);
+        ot = (TextView) findViewById(R.id.ot);
+        pn = (TextView) findViewById(R.id.pn);
+        he = (TextView) findViewById(R.id.he);
+        ca = (TextView) findViewById(R.id.ca);
+        vi = (TextView) findViewById(R.id.vi);
+        me = (TextView) findViewById(R.id.me);
+        dia = (TextView) findViewById(R.id.dia);
+        rco = (RecyclerView) findViewById(R.id.rco);
+        RAll = (GridView) findViewById(R.id.RAll);
+        tip = (RecyclerView) findViewById(R.id.tip);
+        rhe = (RecyclerView) findViewById(R.id.rhe);
+        rwo = (RecyclerView) findViewById(R.id.rwo);
+        rde = (RecyclerView) findViewById(R.id.rde);
+        rme = (RecyclerView) findViewById(R.id.rme);
+        rho = (RecyclerView) findViewById(R.id.rho);
+        rpn = (RecyclerView) findViewById(R.id.rpn);
+        rnu = (RecyclerView) findViewById(R.id.rnu);
+        rot = (RecyclerView) findViewById(R.id.rot);
+        rca = (RecyclerView) findViewById(R.id.rca);
+        rvi = (RecyclerView) findViewById(R.id.rvi);
+        rdi = (RecyclerView) findViewById(R.id.rdi);
+        ta = new TipAdapter(getApplicationContext(), img, na);
+        tip.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         tip.setAdapter(ta);
+        FirebaseDatabase.getInstance().getReference("Users").child(email1).child("CartCount").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.hasChildren())
+                count.setText(snapshot.child("count").getValue(String.class));
+                else
+                    count.setText(0+"");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         FirebaseDatabase.getInstance().getReference("Medicines").child(co.getText().toString()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -100,12 +148,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list.add(me);
                     }
-                    rco.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list);
+                    rco.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list);
                     rco.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     co.setVisibility(View.GONE);
                     rco.setVisibility(View.GONE);
                 }
@@ -125,12 +171,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list1.add(me);
                     }
-                    rwo.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list1);
+                    rwo.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list1);
                     rwo.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     rwo.setVisibility(View.GONE);
                     wo.setVisibility(View.GONE);
                 }
@@ -150,12 +194,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list2.add(me);
                     }
-                    rde.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list2);
+                    rde.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list2);
                     rde.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     rde.setVisibility(View.GONE);
                     de.setVisibility(View.GONE);
                 }
@@ -175,12 +217,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list3.add(me);
                     }
-                    rho.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list2);
+                    rho.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list2);
                     rho.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     ho.setVisibility(View.GONE);
                     rho.setVisibility(View.GONE);
                 }
@@ -200,12 +240,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list4.add(me);
                     }
-                    rnu.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list4);
+                    rnu.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list4);
                     rnu.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     nu.setVisibility(View.GONE);
                     rnu.setVisibility(View.GONE);
                 }
@@ -225,12 +263,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list5.add(me);
                     }
-                    rvi.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list5);
+                    rvi.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list5);
                     rvi.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     vi.setVisibility(View.GONE);
                     rvi.setVisibility(View.GONE);
                 }
@@ -250,12 +286,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list6.add(me);
                     }
-                    rhe.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list6);
+                    rhe.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list6);
                     rhe.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     he.setVisibility(View.GONE);
                     rhe.setVisibility(View.GONE);
                 }
@@ -275,12 +309,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list7.add(me);
                     }
-                    rca.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list7);
+                    rca.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list7);
                     rca.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     ca.setVisibility(View.GONE);
                     rca.setVisibility(View.GONE);
                 }
@@ -300,12 +332,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list8.add(me);
                     }
-                    rdi.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list8);
+                    rdi.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list8);
                     rdi.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     dia.setVisibility(View.GONE);
                     rdi.setVisibility(View.GONE);
                 }
@@ -325,12 +355,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list9.add(me);
                     }
-                    rpn.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list9);
+                    rpn.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list9);
                     rpn.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     pn.setVisibility(View.GONE);
                     rpn.setVisibility(View.GONE);
                 }
@@ -350,12 +378,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list10.add(me);
                     }
-                    rme.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list10);
+                    rme.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list10);
                     rme.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     me.setVisibility(View.GONE);
                     rme.setVisibility(View.GONE);
                 }
@@ -375,12 +401,10 @@ public class User_Section extends AppCompatActivity {
                         Med me = ds.getValue(Med.class);
                         list11.add(me);
                     }
-                    rot.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list11);
+                    rot.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    m = new MedAdapter(User_Section.this, list11);
                     rot.setAdapter(m);
-                }
-                else
-                {
+                } else {
                     ot.setVisibility(View.GONE);
                     rot.setVisibility(View.GONE);
                 }
@@ -391,12 +415,42 @@ public class User_Section extends AppCompatActivity {
 
             }
         });
-search.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        startActivity(new Intent(getApplicationContext(),ShowResults.class).putExtra("Re",se.getText().toString()));
-    }
-});
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ShowResults.class).putExtra("Re", se.getText().toString()));
+            }
+        });
+        FirebaseDatabase.getInstance().getReference("AllMedicines").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()) {
+                    list15.clear();
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Med me = ds.getValue(Med.class);
+                        list15.add(me);
+                    }
+                    m1 = new GridAdapter(User_Section.this, list15);
+                    RAll.setAdapter(m1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        RAll.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(getApplicationContext(), ShowProduct.class).putExtra("Url", list.get(i).getURL()
+                ).putExtra("Name", list.get(i).getName()).putExtra("Mname", list.get(i).getMname()).
+                        putExtra("Qua", list.get(i).getQua()).putExtra("Des", list.get(i).getDes()).
+                        putExtra("Dis", list.get(i).getDisease()).putExtra("Ran", list.get(i).getRan()).putExtra("Price", list.get(i).getPrice()));
+
+            }
+        });
 
     }
 }
