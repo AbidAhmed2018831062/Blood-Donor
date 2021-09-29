@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".OrdersRe"
+            android:exported="true" />
+        <activity
             android:name=".TakeAddress"
             android:exported="true" />
         <activity

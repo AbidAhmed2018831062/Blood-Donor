@@ -160,7 +160,8 @@ String gh1="";
                         month = "November";
                     else month = "December";
                     Random rn=new Random();
-                    long gh=rn.nextInt(10000000);  SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss");
+                    long gh=rn.nextInt(10000000);
+                    SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss");
                     String time=sdf.format(cal.getTime());
                     PostingData pd;
                    if(work.equals("Edit"))

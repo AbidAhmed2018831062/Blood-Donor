@@ -164,8 +164,7 @@ public class AddMedicine extends AppCompatActivity {
                     String ty=type.getSelectedItem().toString();
                     String di=disease.getSelectedItem().toString();
                     a.setVisibility(View.GONE);
-                    des.setText("");
-                    qua.setText("");
+
                    ph.setImageResource(0);
                    name1.getText().toString();
                    price.setText("");
@@ -181,6 +180,8 @@ public class AddMedicine extends AppCompatActivity {
                  med=new Med(me,p,ty,di,op+"",hm.get(SessionManager.BNAME),dis+" "+div,URL,des.getText().toString(),qua.getText().toString());
                     else
                         med=new Med(me,p,ty,di,op+"",name1.getText().toString(),dis+" "+div,URL,des.getText().toString(),qua.getText().toString());
+                    des.setText("");
+                    qua.setText("");
                     FirebaseDatabase.getInstance().getReference("MedicineOwners").child(email1).child("Medicines").child(disease.getSelectedItem().toString()).child(op+"").setValue(med);
                     FirebaseDatabase.getInstance().getReference("Medicines").child(disease.getSelectedItem().toString()).child(op+"").setValue(med);
                     FirebaseDatabase.getInstance().getReference("AllMedicines").child(op+"").setValue(med);

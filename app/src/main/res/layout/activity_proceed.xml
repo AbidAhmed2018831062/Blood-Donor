@@ -21,7 +21,8 @@
        <androidx.cardview.widget.CardView android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        app:cardElevation="10dp">
+        app:cardElevation="10dp"
+           android:layout_marginTop="20dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -44,19 +45,48 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/profile_name"
-                    android:textStyle="normal"
+                    android:textStyle="bold"
                     android:textColor="#000"
                     android:textSize="14sp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"></TextView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/location"
-                    android:textStyle="normal"
+                    android:textStyle="bold"
                     android:textColor="#000"
+                    android:layout_marginLeft="5dp"
                     android:textSize="14sp"
-                    android:layout_marginTop="20dp"></TextView>
+                    android:layout_marginTop="10dp"></TextView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/phone"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="14sp"
+                        android:layout_marginTop="10dp"></TextView>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:id="@+id/change"
+                        android:background="@drawable/button"
+                        android:text="Change"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#fff"
+                        android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 
@@ -76,19 +106,21 @@
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:orientation="vertical">
+           android:orientation="vertical"
+           android:layout_margin="10dp">
            <RelativeLayout
                android:layout_width="match_parent"
                android:layout_height="match_parent"
              >
+
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_alignParentLeft="true"
                    android:text="Subtotal"
+                   android:textColor="#000"
                    android:textSize="16sp"
-                   android:textStyle="bold"
-                   android:textColor="#000"></TextView>
+                   android:textStyle="bold"></TextView>
 
                <TextView
                    android:id="@+id/total"
@@ -128,14 +160,16 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent"
          >
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_alignParentLeft="true"
-               android:text="Delivery(Outside Dhaka)"
-               android:textSize="16sp"
-               android:textStyle="bold"
-               android:textColor="#000"></TextView>
+
+               <TextView
+                   android:id="@+id/dh"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentLeft="true"
+                   android:text="Delivery(Outside Sylhet)"
+                   android:textColor="#000"
+                   android:textSize="16sp"
+                   android:textStyle="bold"></TextView>
 
            <TextView
                android:id="@+id/deli"
@@ -158,14 +192,15 @@
                android:layout_width="match_parent"
                android:layout_height="match_parent"
                >
+
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_alignParentLeft="true"
                    android:text="Total Payable Money:"
+                   android:textColor="#000"
                    android:textSize="16sp"
-                   android:textStyle="bold"
-                   android:textColor="#000"></TextView>
+                   android:textStyle="bold"></TextView>
 
                <TextView
                    android:id="@+id/order"

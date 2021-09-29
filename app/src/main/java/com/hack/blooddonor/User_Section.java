@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,7 +21,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -54,7 +59,9 @@ public class User_Section extends AppCompatActivity {
     List<Med> list13 = new ArrayList<>();
     List<Med> list14 = new ArrayList<>();
     List<Med> list15 = new ArrayList<>();
+    LinearLayout snack;
     MedAdapter m;
+    BottomNavigationView bm;
     String email, email1 = "",url,name;
     int img[] = {R.drawable.covid19, R.drawable.women, R.drawable.device, R.drawable.homeo, R.drawable.nut, R.drawable.vita, R.drawable.he
             , R.drawable.can, R.drawable.dia, R.drawable.pne, R.drawable.ment, R.drawable.ment, R.drawable.oth};
@@ -67,10 +74,32 @@ public class User_Section extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_user_section);
+        bm = (BottomNavigationView) findViewById(R.id.bottomnav);
+        bm.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                if (item.getItemId()==R.id.s) {
+                    startActivity(new Intent(User_Section.this, MainActivity.class));
+                }  else if (item.getItemId() == R.id.donors) {
+                    startActivity(new Intent(User_Section.this, OrdersRe.class));
+
+                }
+                else if(item.getItemId()==R.id.noti)
+                {
+                    startActivity(new Intent(User_Section.this, Notifications.class));
+                }
+                else if(item.getItemId()==R.id.profile)
+                {
+                    //  startActivity(new Intent(UserPrfofilew.this, WatchLater.class));
+
+                }
+            }
+        });
         co = (TextView) findViewById(R.id.co);
         All = (TextView) findViewById(R.id.All);
         count = (TextView) findViewById(R.id.count);
         scart = (RelativeLayout) findViewById(R.id.scart);
+        snack = (LinearLayout) findViewById(R.id.snack);
         se = (EditText) findViewById(R.id.se);
         search = (ImageView) findViewById(R.id.search);
         cart = (ImageView) findViewById(R.id.cart);
@@ -91,7 +120,30 @@ public class User_Section extends AppCompatActivity {
             public void onClick(View view) {
                 if(!count.getText().toString().equals("0"))
                 {
-                    startActivity(new Intent(getApplicationContext(),TakeAddress.class));
+                    FirebaseDatabase.getInstance().getReference("Users").child(email1).child("CartAd").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.hasChildren()){
+                                    String dis3=snapshot.child("dis").getValue(String.class);
+                                    String dis4=snapshot.child("div").getValue(String.class);
+                                    String dis5=snapshot.child("home").getValue(String.class);
+                                    String dis6=snapshot.child("phone").getValue(String.class);
+                                    startActivity(new Intent(getApplicationContext(), Proceed.class).putExtra("Location",dis5+" ,"+dis3+" ,"+dis4).putExtra("Phone",dis6));
+                                }
+                            else
+                                startActivity(new Intent(getApplicationContext(),TakeAddress.class).putExtra("Work","No"));
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Add elements to cart first!!",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -149,7 +201,7 @@ public class User_Section extends AppCompatActivity {
                         list.add(me);
                     }
                     rco.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list);
+                    m = new MedAdapter(User_Section.this, list,"Us");
                     rco.setAdapter(m);
                 } else {
                     co.setVisibility(View.GONE);
@@ -172,7 +224,7 @@ public class User_Section extends AppCompatActivity {
                         list1.add(me);
                     }
                     rwo.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list1);
+                    m = new MedAdapter(User_Section.this, list1,"Us");
                     rwo.setAdapter(m);
                 } else {
                     rwo.setVisibility(View.GONE);
@@ -195,7 +247,7 @@ public class User_Section extends AppCompatActivity {
                         list2.add(me);
                     }
                     rde.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list2);
+                    m = new MedAdapter(User_Section.this, list2,"Us");
                     rde.setAdapter(m);
                 } else {
                     rde.setVisibility(View.GONE);
@@ -218,7 +270,7 @@ public class User_Section extends AppCompatActivity {
                         list3.add(me);
                     }
                     rho.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list2);
+                    m = new MedAdapter(User_Section.this, list2,"Us");
                     rho.setAdapter(m);
                 } else {
                     ho.setVisibility(View.GONE);
@@ -241,7 +293,7 @@ public class User_Section extends AppCompatActivity {
                         list4.add(me);
                     }
                     rnu.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list4);
+                    m = new MedAdapter(User_Section.this, list4,"Us");
                     rnu.setAdapter(m);
                 } else {
                     nu.setVisibility(View.GONE);
@@ -264,7 +316,7 @@ public class User_Section extends AppCompatActivity {
                         list5.add(me);
                     }
                     rvi.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list5);
+                    m = new MedAdapter(User_Section.this, list5,"Us");
                     rvi.setAdapter(m);
                 } else {
                     vi.setVisibility(View.GONE);
@@ -287,7 +339,7 @@ public class User_Section extends AppCompatActivity {
                         list6.add(me);
                     }
                     rhe.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list6);
+                    m = new MedAdapter(User_Section.this, list6,"Us");
                     rhe.setAdapter(m);
                 } else {
                     he.setVisibility(View.GONE);
@@ -310,7 +362,7 @@ public class User_Section extends AppCompatActivity {
                         list7.add(me);
                     }
                     rca.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list7);
+                    m = new MedAdapter(User_Section.this, list7,"Us");
                     rca.setAdapter(m);
                 } else {
                     ca.setVisibility(View.GONE);
@@ -333,7 +385,7 @@ public class User_Section extends AppCompatActivity {
                         list8.add(me);
                     }
                     rdi.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list8);
+                    m = new MedAdapter(User_Section.this, list8,"Us");
                     rdi.setAdapter(m);
                 } else {
                     dia.setVisibility(View.GONE);
@@ -356,7 +408,7 @@ public class User_Section extends AppCompatActivity {
                         list9.add(me);
                     }
                     rpn.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list9);
+                    m = new MedAdapter(User_Section.this, list9,"Us");
                     rpn.setAdapter(m);
                 } else {
                     pn.setVisibility(View.GONE);
@@ -379,7 +431,7 @@ public class User_Section extends AppCompatActivity {
                         list10.add(me);
                     }
                     rme.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list10);
+                    m = new MedAdapter(User_Section.this, list10,"Us");
                     rme.setAdapter(m);
                 } else {
                     me.setVisibility(View.GONE);
@@ -402,7 +454,7 @@ public class User_Section extends AppCompatActivity {
                         list11.add(me);
                     }
                     rot.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    m = new MedAdapter(User_Section.this, list11);
+                    m = new MedAdapter(User_Section.this, list11,"Us");
                     rot.setAdapter(m);
                 } else {
                     ot.setVisibility(View.GONE);

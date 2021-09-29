@@ -27,6 +27,7 @@ public class TakeAddress extends AppCompatActivity {
     String di[],div[];
     EditText phone,location;
     Button pay;
+    String work;
     String email1="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,13 @@ public class TakeAddress extends AppCompatActivity {
         setContentView(R.layout.activity_take_address);
         district=(AutoCompleteTextView) findViewById(R.id.district);
         phone=(EditText) findViewById(R.id.phone);
+        work=getIntent().getStringExtra("Work");
         pay=(Button) findViewById(R.id.pay);
         SessionManager sh = new SessionManager(getApplicationContext(), SessionManager.USERSESSION);
         HashMap<String, String> hm = sh.returnData();
         String email = hm.get(SessionManager.EMAIL);
+        di=getResources().getStringArray(R.array.districts);
+        div=getResources().getStringArray(R.array.divisions);
 
         for(int u=0;u<email.length();u++)
         {
@@ -57,19 +61,42 @@ public class TakeAddress extends AppCompatActivity {
         district.setAdapter(adapter);
         ArrayAdapter<String> ar2=new ArrayAdapter<String>(this, R.layout.education,R.id.Edu,div);
         division.setAdapter(ar2);
+        if(work!=null&&work.equals("Yes"))
+        {
+            FirebaseDatabase.getInstance().getReference("Users").child(email1).child("CartAd").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.hasChildren()){
+                        String dis3=snapshot.child("dis").getValue(String.class);
+                        String dis4=snapshot.child("div").getValue(String.class);
+                        String dis5=snapshot.child("home").getValue(String.class);
+                        String dis6=snapshot.child("phone").getValue(String.class);
+                       phone.setText(dis6);
+                       district.setText(dis3);
+                       location.setText(dis5);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
        pay.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                if(phone.getText().toString().length()!=0&&location.getText().toString().length()!=0)
                {
                    HashMap mp=new HashMap();
-                   mp.put("phone",phone);
+                   mp.put("phone",phone.getText().toString());
                    mp.put("dis",district.getText().toString());
                    mp.put("div",division.getSelectedItem().toString());
                    mp.put("home",location.getText().toString());
 
                    FirebaseDatabase.getInstance().getReference("Users").child(email1).child("CartAd").setValue(mp);
-                   startActivity(new Intent(getApplicationContext(),Proceed.class).putExtra("Location",location.getText().toString()+", "+division.getSelectedItem().toString()+", "+district.getText().toString()));
+                   startActivity(new Intent(getApplicationContext(),Proceed.class).putExtra("Location",location.getText().toString()+", "+division.getSelectedItem().toString()+", "+district.getText().toString()).putExtra("Phone",phone.getText().toString()));
                }
            }
        });

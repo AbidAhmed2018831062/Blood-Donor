@@ -46,7 +46,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:background="#fff">
+                android:background="#fff"
+                android:paddingTop="5dp"
+                android:id="@+id/ert">
 
                 <ImageView
                     android:id="@+id/cart"
@@ -60,7 +62,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignRight="@+id/cart"
                     android:layout_marginLeft="10dp"
-                    android:text="1"
+                    android:layout_marginTop="-10dp"
+                    android:text="0"
                     android:textColor="@color/Blood"
                     android:textSize="16sp"
                     android:textStyle="bold"></TextView>
@@ -169,9 +172,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:text="Simmilar Products"
             android:textStyle="bold"
+            android:padding="5dp"
+            android:layout_marginBottom="20dp"
             android:textSize="18dp"
             android:textColor="#000"
             android:background="@color/grey"></TextView>
@@ -184,6 +189,23 @@
            android:horizontalSpacing="20dp"
            android:verticalSpacing="20dp"
            android:numColumns="2"></GridView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Disclaimer"
+            android:textSize="18sp"
+            android:textColor="@color/Blood"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            ></TextView>
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:text="Information provided here is accurate and updated by specialist. But we do not take any responsiblity of these products if you are buying these products without doctor's consultancy!! "
+            android:layout_marginBottom="100dp"></TextView>
     </LinearLayout>
 </ScrollView>
     <LinearLayout
@@ -191,7 +213,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:elevation="10dp">
+        android:elevation="10dp"
+        android:id="@+id/ca">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -202,7 +225,7 @@
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="wrap_content"
-        android:text="1 Item   |"
+        android:text="0 Item   |"
         android:textColor="#fff"
         android:textStyle="bold"
         android:textSize="18sp"

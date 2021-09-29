@@ -3,8 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="15dp"
-    android:background="@drawable/post"
-    android:layout_marginBottom="50dp">
+    android:background="@drawable/post">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

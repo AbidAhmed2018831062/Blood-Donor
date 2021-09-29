@@ -104,7 +104,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list.add(me);
                     }
                     rco.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(OwnerProfile.this,list);
+                    m=new MedAdapter(OwnerProfile.this,list,"Ow");
                     rco.setAdapter(m);
                 }
                 else
@@ -129,7 +129,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list1.add(me);
                     }
                     rwo.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(OwnerProfile.this,list1);
+                    m=new MedAdapter(OwnerProfile.this,list1,"Ow");
                     rwo.setAdapter(m);
                 }
                 else
@@ -154,7 +154,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list2.add(me);
                     }
                     rde.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(OwnerProfile.this,list2);
+                    m=new MedAdapter(OwnerProfile.this,list2,"Ow");
                     rde.setAdapter(m);
                 }
                 else
@@ -179,7 +179,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list3.add(me);
                     }
                     rho.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(OwnerProfile.this,list3);
+                    m=new MedAdapter(OwnerProfile.this,list3,"Ow");
                     rho.setAdapter(m);
                 }
                 else
@@ -204,7 +204,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list4.add(me);
                     }
                     rnu.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(OwnerProfile.this,list4);
+                    m=new MedAdapter(OwnerProfile.this,list4,"Ow");
                     rnu.setAdapter(m);
                 }
                 else
@@ -229,7 +229,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list5.add(me);
                     }
                     rvi.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(OwnerProfile.this,list5);
+                    m=new MedAdapter(OwnerProfile.this,list5,"Ow");
                     rvi.setAdapter(m);
                 }
                 else
@@ -254,7 +254,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list6.add(me);
                     }
                     rhe.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(OwnerProfile.this,list6);
+                    m=new MedAdapter(OwnerProfile.this,list6,"Ow");
                     rhe.setAdapter(m);
                 }
                 else
@@ -279,7 +279,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list7.add(me);
                     }
                     rca.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(OwnerProfile.this,list7);
+                    m=new MedAdapter(OwnerProfile.this,list7,"Ow");
                     rca.setAdapter(m);
                 }
                 else
@@ -304,7 +304,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list8.add(me);
                     }
                     rdi.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(OwnerProfile.this,list8);
+                    m=new MedAdapter(OwnerProfile.this,list8,"Ow");
                     rdi.setAdapter(m);
                 }
                 else
@@ -329,7 +329,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list9.add(me);
                     }
                     rpn.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(getApplicationContext(),list9);
+                    m=new MedAdapter(OwnerProfile.this,list9,"Ow");
                     rpn.setAdapter(m);
                 }
                 else
@@ -354,7 +354,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list10.add(me);
                     }
                     rme.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(OwnerProfile.this,list10);
+                    m=new MedAdapter(OwnerProfile.this,list10,"Ow");
                     rme.setAdapter(m);
                 }
                 else
@@ -379,7 +379,7 @@ add.setOnClickListener(new View.OnClickListener() {
                         list11.add(me);
                     }
                     rot.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                    m=new MedAdapter(OwnerProfile.this,list11);
+                    m=new MedAdapter(OwnerProfile.this,list11,"Ow");
                     rot.setAdapter(m);
                 }
                 else

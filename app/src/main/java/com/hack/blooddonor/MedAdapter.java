@@ -23,10 +23,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MedAdapter  extends RecyclerView.Adapter<MedAdapter.MED> {
     List<Med> list;
     Context c;
-    MedAdapter(Context c, List<Med>list)
+    String wo;
+    MedAdapter(Context c, List<Med>list,String wo)
     {
         this.c=c;
         this.list=list;
+        this.wo=wo;
     }
 
     @NonNull
@@ -46,11 +48,12 @@ public class MedAdapter  extends RecyclerView.Adapter<MedAdapter.MED> {
         holder.buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                c.startActivity(new Intent(c,ShowProduct.class).putExtra("Url",list.get(i).getURL()
-                ).putExtra("Name",list.get(i).getName()).putExtra("Mname",list.get(i).getMname()).
-                        putExtra("Qua",list.get(i).getQua()).putExtra("Des",list.get(i).getDes()).
-                        putExtra("Dis",list.get(i).getDisease()).putExtra("Ran",list.get(i).getRan()).putExtra("Price",list.get(i).getPrice()));
-
+                if(!wo.equals("Ow")) {
+                    c.startActivity(new Intent(c, ShowProduct.class).putExtra("Url", list.get(i).getURL()
+                    ).putExtra("Name", list.get(i).getName()).putExtra("Mname", list.get(i).getMname()).
+                            putExtra("Qua", list.get(i).getQua()).putExtra("Des", list.get(i).getDes()).
+                            putExtra("Dis", list.get(i).getDisease()).putExtra("Ran", list.get(i).getRan()).putExtra("Price", list.get(i).getPrice()));
+                }
             }
         });
 

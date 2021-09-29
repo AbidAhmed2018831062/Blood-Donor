@@ -2,6 +2,8 @@ package com.hack.blooddonor;
 
 public class CartData {
     String mname,price,count,bname,ran,total,url;
+public CartData()
+{}
 
     public CartData(String mname, String price, String count, String bname, String ran, String total,String url) {
         this.mname = mname;

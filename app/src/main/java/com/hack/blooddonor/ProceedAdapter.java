@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,20 +56,26 @@ public class ProceedAdapter extends RecyclerView.Adapter<ProceedAdapter.Pro> {
         holder.mname.setText(list.get(i).getMname());
         holder.count.setText(list.get(i).getCount());
         long p=Integer.parseInt(list.get(i).getPrice())*Integer.parseInt(list.get(i).getCount());
-        holder.total.setText(list.get(i).getPrice()+"* "+list.get(i).getCount()+" = "+list.get(i).getTotal());
+        holder.total.setText(list.get(i).getPrice()+"* "+list.get(i).getCount()+" = "+list.get(i).getTotal()+"Tk.");
         String finalEmail = email1;
         holder.del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(c.getApplicationContext(), finalEmail,Toast.LENGTH_LONG).show();
                 FirebaseDatabase.getInstance().getReference("Users").child(finalEmail).child("CartCount").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String uy=snapshot.child("count").getValue().toString();
-                        long r=Integer.parseInt(uy)-Integer.parseInt(list.get(i).getCount());
-                        HashMap ty=new HashMap();
-                        ty.put("count",r+"");
-                        FirebaseDatabase.getInstance().getReference("Users").child(finalEmail).child("CartCount").updateChildren(ty);
-
+                        if(snapshot.hasChildren()&&list.size()!=0) {
+                            String uy = snapshot.child("count").getValue().toString();
+                            long r = Integer.parseInt(uy) - Integer.parseInt(list.get(i).getCount());
+                            HashMap ty = new HashMap();
+                            ty.put("count", r + "");
+                            Toast.makeText(c.getApplicationContext(), r+""+uy,Toast.LENGTH_LONG).show();
+                            FirebaseDatabase.getInstance().getReference("Users").child(finalEmail).child("CartCount").updateChildren(ty);
+                            FirebaseDatabase.getInstance().getReference("Users").child(finalEmail).child("Cart").child(list.get(i).getRan()).removeValue();
+                            list.remove(i);
+                            notifyDataSetChanged();
+                        }
                     }
 
                     @Override
@@ -76,9 +83,7 @@ public class ProceedAdapter extends RecyclerView.Adapter<ProceedAdapter.Pro> {
 
                     }
                 });
-                FirebaseDatabase.getInstance().getReference("Users").child(finalEmail).child("Cart").child(list.get(i).getRan()).removeValue();
-                list.remove(i);
-                notifyDataSetChanged();
+
 
             }
         });
@@ -87,7 +92,7 @@ public class ProceedAdapter extends RecyclerView.Adapter<ProceedAdapter.Pro> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list == null ? 0 : list.size();
     }
 
     public class Pro extends RecyclerView.ViewHolder {
