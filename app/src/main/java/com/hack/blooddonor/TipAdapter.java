@@ -1,6 +1,8 @@
 package com.hack.blooddonor;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -32,10 +35,19 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.Tips> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Tips holder, int i) {
+    public void onBindViewHolder(@NonNull Tips holder, @SuppressLint("RecyclerView") int i) {
         holder.ph.setImageResource(img[i]);
-        //Toast.makeText(c,na[i],Toast.LENGTH_LONG).show();
         holder.he.setText(na[i]);
+        holder.tr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                c.startActivity(new Intent(c, TrShow.class).putExtra("Re", na[i]));
+
+            }
+        });
+
+
+
 
 
     }
@@ -48,10 +60,12 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.Tips> {
     public class Tips extends RecyclerView.ViewHolder {
         CircleImageView ph;
         TextView he;
+        CardView tr;
         public Tips(@NonNull View v) {
             super(v);
             ph=v.findViewById(R.id.ph);
             he=v.findViewById(R.id.he);
+            tr=v.findViewById(R.id.tr);
         }
     }
 }

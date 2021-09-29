@@ -24,25 +24,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ShowResults extends AppCompatActivity {
-String re1;
-TextView re;
-RecyclerView rere;
-MedAdapter ad;
-String[] ty=new String [5];
-int re3=0;
+public class TrShow extends AppCompatActivity {
+    String re1;
+    TextView re;
+    RecyclerView rere;
+    MedAdapter ad;
+    String[] ty=new String [5];
+    int re3=0;
     GridView gr;
     String email,email1="",url,name;
     GridAdapter agr;
-List<Med> list=new ArrayList<>();
-List<Med> list1=new ArrayList<>();
+    List<Med> list=new ArrayList<>();
+    List<Med> list1=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_show_results);
-
+        setContentView(R.layout.activity_tr_show);
         re=(TextView) findViewById(R.id.re);
         gr=(GridView) findViewById(R.id.grid);
         rere=(RecyclerView) findViewById(R.id.rere);
@@ -59,26 +58,22 @@ List<Med> list1=new ArrayList<>();
         }
 
         rere.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        ad=new MedAdapter(ShowResults.this,list,"Sh");
+        ad=new MedAdapter(TrShow.this,list1,"Sh");
         rere.setAdapter(ad);
         re.setText("Showing results for "+re1);
         FirebaseDatabase.getInstance().getReference("AllMedicines").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
                 for(DataSnapshot s:snapshot.getChildren())
                 {
                     Med de=s.getValue(Med.class);
                     re1=re1.toLowerCase();
 
-                    String n=de.getMname().toLowerCase();
-                    Toast.makeText(getApplicationContext(),n+" "+re1,Toast.LENGTH_LONG).show();
+                    String n=de.getDisease().toLowerCase();
+                    //Toast.makeText(getApplicationContext(),n+" "+re1,Toast.LENGTH_LONG).show();
                     if(n.contains(re1)||n.equals(re1)||re1.contains(n)) {
-                        if(re3<5)
-                        {
-                            ty[re3]=de.getDisease();
-                            re3++;
-                        }
-                        list.add(de);
+                        list1.add(de);
                     }
                 }
                 ad.notifyDataSetChanged();
@@ -89,18 +84,22 @@ List<Med> list1=new ArrayList<>();
 
             }
         });
-        agr=new GridAdapter(getApplicationContext(),list1);
+        agr=new GridAdapter(getApplicationContext(),list);
         gr.setAdapter(agr);
+        ty[0]="Vitamins";
+        ty[1]="Penumonia";
+        re3=2;
         for(int i=0;i<re3;i++)
         {
 
             FirebaseDatabase.getInstance().getReference("Medicines").child(ty[i]).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    list1.clear();
                     for(DataSnapshot s: snapshot.getChildren())
                     {
                         Med de=s.getValue(Med.class);
-                        list1.add(de);
+                        list.add(de);
                     }
                     agr.notifyDataSetChanged();
                 }

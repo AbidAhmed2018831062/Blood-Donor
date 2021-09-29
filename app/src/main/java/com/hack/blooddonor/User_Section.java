@@ -173,7 +173,7 @@ public class User_Section extends AppCompatActivity {
         rca = (RecyclerView) findViewById(R.id.rca);
         rvi = (RecyclerView) findViewById(R.id.rvi);
         rdi = (RecyclerView) findViewById(R.id.rdi);
-        ta = new TipAdapter(getApplicationContext(), img, na);
+        ta = new TipAdapter(User_Section.this, img, na);
         tip.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         tip.setAdapter(ta);
         FirebaseDatabase.getInstance().getReference("Users").child(email1).child("CartCount").addValueEventListener(new ValueEventListener() {

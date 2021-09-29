@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/sncak">
         <ImageView
             android:id="@+id/back"
             android:layout_width="wrap_content"
@@ -18,10 +19,22 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/arrowb" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/d"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:text="Nothing is added on your cart. Buy products to order. Thank You"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"></TextView>
        <androidx.cardview.widget.CardView android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         app:cardElevation="10dp"
+           android:id="@+id/car"
            android:layout_marginTop="20dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,7 +120,8 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:orientation="vertical"
-           android:layout_margin="10dp">
+           android:layout_margin="10dp"
+           android:id="@id/snack">
            <RelativeLayout
                android:layout_width="match_parent"
                android:layout_height="match_parent"

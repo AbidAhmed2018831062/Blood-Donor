@@ -2,19 +2,23 @@ package com.hack.blooddonor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -46,7 +50,10 @@ TextView total,order,deli;
 RecyclerView scart;
 List<CartData> list=new ArrayList<>();
 ProceedAdapter pa;
+LinearLayout snack;
+TextView er;
 String pro="";
+CardView car;
 int cy=0;
 CircleImageView profile_image;
 TextView profile_name,location,phone;
@@ -67,6 +74,9 @@ long to=0;
         setContentView(R.layout.activity_proceed);
         total=(TextView) findViewById(R.id.total);
         location=(TextView) findViewById(R.id.location);
+        car=(CardView) findViewById(R.id.car);
+        er=(TextView) findViewById(R.id.d);
+        snack=(LinearLayout) findViewById(R.id.snack);
         pay=(Button) findViewById(R.id.pay);
         change=(Button) findViewById(R.id.change);
         dh=(TextView) findViewById(R.id.dh);
@@ -143,13 +153,16 @@ long to=0;
         FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Cart").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChildren()) {
+                to=0;
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         CartData cs = ds.getValue(CartData.class);
                         to += Integer.parseInt(cs.getTotal());
                         list.add(cs);
                         pro += "\n" + cs.getCount() + "x" + cs.getMname();
                     }
+                    pa.notifyDataSetChanged();
+
                     String yt = location.getText().toString().toLowerCase();
                     total.setText(to + "Tk.");
                     if (yt.contains("sylhet")) {
@@ -158,10 +171,17 @@ long to=0;
                     } else
                         to += 100;
 
-
+                     if(to==0){
+                         Toast.makeText(getApplicationContext(),"Nothing is added on cart!!",Toast.LENGTH_LONG).show();
+                         pay.setText("Buy Products");
+                         deli.setText("0Tk.");
+                         car.setVisibility(View.GONE);
+                         snack.setVisibility(View.GONE);
+                         er.setVisibility(View.VISIBLE);
+                     }
                     order.setText(to + "Tk.");
-                    pa.notifyDataSetChanged();
-                }
+
+
 
             }
             @Override
@@ -213,7 +233,7 @@ long to=0;
                     message.setFrom(new InternetAddress(Email));
                     message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
                     message.setSubject(subject);
-                    message.setText("New order was ssuccessful. Total:"+to+"Tk. Delivery Location: "+location+"\n\n For any query mail at hotelarshb7@gmail.com or you can call us at 01308376904 24 hours." );
+                    message.setText("New order was successful. Total:"+to+"Tk. Delivery Location: "+location.getText().toString()+"\n\n For any query mail at hotelarshb7@gmail.com or you can call us at 01308376904 24 hours." );
 
                     new Proceed.SendEmail().execute(message);
 

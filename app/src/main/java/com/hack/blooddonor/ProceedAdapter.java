@@ -56,7 +56,7 @@ public class ProceedAdapter extends RecyclerView.Adapter<ProceedAdapter.Pro> {
         holder.mname.setText(list.get(i).getMname());
         holder.count.setText(list.get(i).getCount());
         long p=Integer.parseInt(list.get(i).getPrice())*Integer.parseInt(list.get(i).getCount());
-        holder.total.setText(list.get(i).getPrice()+"* "+list.get(i).getCount()+" = "+list.get(i).getTotal()+"Tk.");
+        holder.total.setText(list.get(i).getPrice()+" x "+list.get(i).getCount()+" = "+list.get(i).getTotal()+"Tk.");
         String finalEmail = email1;
         holder.del.setOnClickListener(new View.OnClickListener() {
             @Override
