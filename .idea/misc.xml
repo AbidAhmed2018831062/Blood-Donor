@@ -6,11 +6,13 @@
         <entry key="..\:/BloodDonor/app/src/main/res/drawable/bottombackground.xml" value="0.14635416666666667" />
         <entry key="..\:/BloodDonor/app/src/main/res/drawable/cart.xml" value="0.2703125" />
         <entry key="..\:/BloodDonor/app/src/main/res/drawable/delete.xml" value="0.12239583333333333" />
+        <entry key="..\:/BloodDonor/app/src/main/res/drawable/fav.xml" value="0.1484375" />
         <entry key="..\:/BloodDonor/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1484375" />
         <entry key="..\:/BloodDonor/app/src/main/res/drawable/text.xml" value="0.2703125" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_add_medicine.xml" value="0.13020833333333334" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_aksing.xml" value="0.21195652173913043" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_donor_reg.xml" value="0.1" />
+        <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_favorite.xml" value="0.2509057971014493" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_med_adapter.xml" value="0.21195652173913043" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_notifications.xml" value="0.1" />
         <entry key="..\:/BloodDonor/app/src/main/res/layout/activity_orders_re.xml" value="0.13229166666666667" />

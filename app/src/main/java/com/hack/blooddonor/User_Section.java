@@ -88,6 +88,10 @@ public class User_Section extends AppCompatActivity {
                 {
                     startActivity(new Intent(User_Section.this, Notifications.class));
                 }
+                else if(item.getItemId()==R.id.fav)
+                {
+                    startActivity(new Intent(User_Section.this, Favorite.class));
+                }
                 else if(item.getItemId()==R.id.profile)
                 {
                     //  startActivity(new Intent(UserPrfofilew.this, WatchLater.class));
