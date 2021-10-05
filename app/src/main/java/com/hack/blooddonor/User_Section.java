@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -61,6 +62,7 @@ public class User_Section extends AppCompatActivity {
     List<Med> list15 = new ArrayList<>();
     LinearLayout snack;
     MedAdapter m;
+    SwipeRefreshLayout refresh;
     BottomNavigationView bm;
     String email, email1 = "",url,name;
     int img[] = {R.drawable.covid19, R.drawable.women, R.drawable.device, R.drawable.homeo, R.drawable.nut, R.drawable.vita, R.drawable.he
@@ -97,6 +99,14 @@ public class User_Section extends AppCompatActivity {
                     //  startActivity(new Intent(UserPrfofilew.this, WatchLater.class));
 
                 }
+            }
+        });
+        refresh=(SwipeRefreshLayout)findViewById(R.id.refresh);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                startActivity(new Intent(getApplicationContext(), PostsandWatch.class));
+                finish();
             }
         });
         co = (TextView) findViewById(R.id.co);

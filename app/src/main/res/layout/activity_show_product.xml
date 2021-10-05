@@ -9,231 +9,246 @@
     tools:context=".ShowProduct"
     tools:ignore="SpeakableTextPresentCheck"
     android:id="@+id/snack">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/mpic"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_alignParentLeft="true"
-                android:scaleType="fitXY"
-
-                android:src="@drawable/k95mask" />
-
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:background="#fff"
-                android:src="@drawable/arrowb" />
-
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="#fff"
-                android:paddingTop="5dp"
-                android:id="@+id/ert">
-
-                <ImageView
-                    android:id="@+id/cart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/cart"></ImageView>
-
-                <TextView
-                    android:id="@+id/count"
-                    android:layout_width="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/cart"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="-10dp"
-                    android:text="0"
-                    android:textColor="@color/Blood"
-                    android:textSize="16sp"
-                    android:textStyle="bold"></TextView>
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           android:layout_marginRight="5dp"
-            android:id="@+id/mname"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:textColor="#000"
-            android:layout_marginTop="10dp"
-              ></TextView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center">
-    <TextView
-            android:layout_width="0dp"
-        android:layout_weight="4"
-            android:layout_height="wrap_content"
-            android:id="@+id/bname"
-            android:textColor="#000"
-            android:text="Abid Pharmacy"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp"
-            ></TextView>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fav"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:background="@drawable/button"
-            android:text="Add To Favorites"
-            android:textColor="#fff"
-            android:textSize="10sp"
-            android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
-
-
-    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/text"
             android:orientation="vertical">
-            <TextView
+
+            <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/mpic"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_alignParentLeft="true"
+                    android:scaleType="fitXY"
+
+                    android:src="@drawable/k95mask" />
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#fff"
+                    android:src="@drawable/arrowb" />
+
+
+                <RelativeLayout
+                    android:id="@+id/ert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#fff"
+                    android:paddingTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/cart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/cart"></ImageView>
+
+                    <TextView
+                        android:id="@+id/count"
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/cart"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="-10dp"
+                        android:text="0"
+                        android:textColor="@color/Blood"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></TextView>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/mname"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="18sp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
                 android:textColor="#000"
-                android:textStyle="bold"
-                android:id="@+id/price"></TextView>
+                android:textSize="18dp"
+                android:textStyle="bold"></TextView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp">
-                <LinearLayout
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/bname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_weight="4"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="10dp">
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:text="-"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:id="@+id/dec"
-                        android:background="@color/grey"></androidx.appcompat.widget.AppCompatButton>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:id="@+id/pr"
-                        android:padding="10dp"></TextView>
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:text="+"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:id="@+id/inc"
-                        android:background="@color/grey"></androidx.appcompat.widget.AppCompatButton>
+                    android:text="Abid Pharmacy"
+                    android:textColor="#000"></TextView>
 
-                </LinearLayout>
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/fav"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:layout_height="48dp"
-                    android:textSize="16sp"
-                    android:padding="10dp"
-                    android:textStyle="bold"
-                    android:textColor="#fff"
-                    android:layout_marginRight="10dp"
-                    android:text="Buy"
                     android:background="@drawable/button"
-                    android:id="@+id/buy"></androidx.appcompat.widget.AppCompatButton>
-            </LinearLayout>
-        </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-           android:text="Description"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:textColor="@color/Blood"></TextView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:id="@+id/des"
-            android:textStyle="bold"
-            android:textSize="16dp"
-            android:textColor="#000"></TextView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Simmilar Products"
-            android:textStyle="bold"
-            android:padding="5dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="18dp"
-            android:textColor="#000"
-            android:background="@color/grey"></TextView>
-       <GridView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-           android:id="@+id/grid"
-           android:layout_marginTop="20dp"
-           android:layout_marginBottom="20dp"
-           android:horizontalSpacing="20dp"
-           android:verticalSpacing="20dp"
-           android:numColumns="2"></GridView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Disclaimer"
-            android:textSize="18sp"
-            android:textColor="@color/Blood"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            ></TextView>
-        <TextView
+                    android:text="Add To Favorites"
+                    android:textColor="#fff"
+                    android:textSize="10sp"
+                    android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="#000"
-            android:text="Information provided here is accurate and updated by specialist. But we do not take any responsiblity of these products if you are buying these products without doctor's consultancy!! "
-            android:layout_marginBottom="100dp"></TextView>
-    </LinearLayout>
-</ScrollView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="4"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/dec"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@color/grey"
+                            android:text="-"
+                            android:textSize="14sp"
+                            android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+
+                        <TextView
+                            android:id="@+id/pr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="1"
+                            android:textSize="16sp"
+                            android:textStyle="bold"></TextView>
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/inc"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@color/grey"
+                            android:text="+"
+                            android:textSize="14sp"
+                            android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buy"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/button"
+                        android:padding="10dp"
+                        android:text="Buy"
+                        android:textColor="#fff"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Description"
+                android:textColor="@color/Blood"
+                android:textSize="18dp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/grey"
+                android:padding="5dp"
+                android:text="Simmilar Products"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:textStyle="bold"></TextView>
+
+            <GridView
+                android:id="@+id/grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:horizontalSpacing="20dp"
+                android:numColumns="2"
+                android:verticalSpacing="20dp"></GridView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Disclaimer"
+                android:textColor="@color/Blood"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:text="Information provided here is accurate and updated by specialist. But we do not take any responsiblity of these products if you are buying these products without doctor's consultancy!! "
+                android:textColor="#000"
+                android:textSize="15sp"></TextView>
+        </LinearLayout>
+    </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

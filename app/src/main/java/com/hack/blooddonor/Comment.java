@@ -202,13 +202,14 @@ send.setOnClickListener(new View.OnClickListener() {
                     se[0] += date.charAt(i);
                 }
                 StringBuilder input1 = new StringBuilder();
+                se[0] = String.valueOf(input1.reverse());
                 Random ru=new Random();
                 long ryu=ru.nextInt(10000000);
                 // append a string into StringBuilder input1
                 input1.append(se[0]);
                Toast.makeText(getApplicationContext(),gh,Toast.LENGTH_LONG).show();
                 // reverse StringBuilder input1
-                se[0] = String.valueOf(input1.reverse());
+
                 String main=write.getText().toString();
                 String m="";
                 if(!finalMain.equals("No"))

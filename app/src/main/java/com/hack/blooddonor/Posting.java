@@ -228,6 +228,8 @@ String gh1="";
 
                         }
                     });
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("hh:mm:ss");
+                    String time1 = sdf.format(cal.getTime());
                     if(work.equals("Edit"))
                     {
                         String date= getIntent().getStringExtra("Date");
@@ -238,10 +240,10 @@ String gh1="";
                         FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Posts").child(mo).child(date).setValue(pd);
                     }
                     else {
-                        FirebaseDatabase.getInstance().getReference("Posts").child(month).child(cday + " " + month + " " + cy + " " + gh).setValue(pd);
-                        FirebaseDatabase.getInstance().getReference("PostsDi").child(district.getText().toString()).child(month).child(cday + " " + month + " " + cy + " " + gh).setValue(pd);
-                        FirebaseDatabase.getInstance().getReference("PostsDi").child(division.getSelectedItem().toString()).child(month).child(cday + " " + month + " " + cy + " " + gh).setValue(pd);
-                        FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Posts").child(month).child(cday + " " + month + " " + cy + " " + gh).setValue(pd);
+                        FirebaseDatabase.getInstance().getReference("Posts").child(month).child(cday + " " + month + " " + cy + " "+time).setValue(pd);
+                        FirebaseDatabase.getInstance().getReference("PostsDi").child(district.getText().toString()).child(month).child(cday + " " + month + " " + cy + " " + time).setValue(pd);
+                        FirebaseDatabase.getInstance().getReference("PostsDi").child(division.getSelectedItem().toString()).child(month).child(cday + " " + month + " " + cy + " " + time).setValue(pd);
+                        FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Posts").child(month).child(cday + " " + month + " " + cy + " " + time).setValue(pd);
 
                     }startActivity(new Intent(getApplicationContext(),PostsandWatch.class));
                    finish();

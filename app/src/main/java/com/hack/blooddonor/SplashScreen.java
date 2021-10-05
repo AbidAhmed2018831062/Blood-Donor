@@ -58,8 +58,10 @@ String phone2;
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         } else {
+            startActivity(new Intent(getApplicationContext(), PostsandWatch.class));
+            finish();
 
-              if(t.equals("NormalUser")) {
+              /*if(t.equals("NormalUser")) {
                   startActivity(new Intent(getApplicationContext(), User_Section.class));
                   finish();
               }
@@ -78,7 +80,7 @@ String phone2;
                 startActivity(new Intent(getApplicationContext(), OwnerProfile.class));
                 finish();
             }
-        }
+        }*/
 
 
     }}
