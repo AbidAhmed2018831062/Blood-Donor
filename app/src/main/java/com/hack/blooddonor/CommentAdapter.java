@@ -19,11 +19,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Comment> {
     List<CommnetsData> list;
     Context c;
-    public CommentAdapter(Context c, List<CommnetsData> list)
+    int wh;
+    public CommentAdapter(Context c, List<CommnetsData> list,int wh)
     {
         this.list=list;
         this.c=c;
+        this.wh=wh;
     }
+
 
     @NonNull
     @Override
@@ -32,10 +35,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Comment>
                 .inflate(R.layout.comments, parent, false);
         return new Comment(view);
     }
+    @Override
+    public void onViewAttachedToWindow(@NonNull Comment holder) {
+        holder.itemView.requestFocus();
+    }
 
     @Override
     public void onBindViewHolder(@NonNull Comment holder, int i) {
-        Toast.makeText(c,list.size()+"",Toast.LENGTH_LONG).show();
+       // Toast.makeText(c,list.size()+"",Toast.LENGTH_LONG).show();
         Picasso.with(c).load(list.get(i).getUrl()).fit().centerCrop().into(holder.profile_image);
         holder.profile_name.setText(list.get(i).getName());
         holder.date.setText(list.get(i).getTimed());
@@ -46,7 +53,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Comment>
         {
             holder.mention.setText(list.get(i).getMention());
         }
+        if(wh==1)
+            holder.itemView.requestFocus(wh);
         holder.main.setText(list.get(i).getMain());
+
+
     }
 
     @Override

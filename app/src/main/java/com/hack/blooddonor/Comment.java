@@ -42,14 +42,12 @@ ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+       // requestWindowFeature(Window.FEATURE_NO_TITLE);
+       // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_comment);
         comment=(RecyclerView)findViewById(R.id.comments);
         write=(AutoCompleteTextView) findViewById(R.id.write);
-        ca=new CommentAdapter(this,list);
-        comment.setLayoutManager(new LinearLayoutManager(this));
-        comment.setAdapter(ca);
+
         date=getIntent().getStringExtra("Date");
         gh=getIntent().getStringExtra("Gh");
         dis=getIntent().getStringExtra("Dis");
@@ -66,13 +64,30 @@ ArrayAdapter<String> adapter;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
+                int k=0,rt=0;
                 for(DataSnapshot s: snapshot.getChildren())
                 {
+
                     CommnetsData de=s.getValue(CommnetsData.class);
-                    Toast.makeText(getApplicationContext(),de.getTimed(),Toast.LENGTH_LONG).show();
+                //    Toast.makeText(getApplicationContext(),de.getTimed(),Toast.LENGTH_LONG).show();
+                    if(de.getTimed().equals(date+" "+getIntent().getStringExtra("Noti")))
+                        k=rt;
+                    rt++;
                     list.add(de);
                 }
-                ca.notifyDataSetChanged();
+                if(getIntent().getStringExtra("Noti").equals("No")) {
+                    ca=new CommentAdapter(Comment.this,list,-1);
+                }
+                else
+                {
+                    ca = new CommentAdapter(Comment.this, list, k);
+                    Toast.makeText(getApplicationContext(),k+" Abid",Toast.LENGTH_LONG).show();
+
+
+                }
+
+                comment.setLayoutManager(new LinearLayoutManager(Comment.this));
+                comment.setAdapter(ca);
             }
 
             @Override
@@ -88,7 +103,7 @@ ArrayAdapter<String> adapter;
                 {
                     names[co]=s.child("name").getValue().toString();
                     token[co]=s.child("token").getValue().toString();
-                //    Toast.makeText(getApplicationContext(),write.getText().toString(),Toast.LENGTH_LONG).show();
+                    //        Toast.makeText(getApplicationContext(),write.getText().toString(),Toast.LENGTH_LONG).show();
                     co++;
                 }
                 String[] na=new String[co];
@@ -107,6 +122,7 @@ ArrayAdapter<String> adapter;
 
             }
         });
+
 
 
 
@@ -141,7 +157,7 @@ send.setOnClickListener(new View.OnClickListener() {
 
 
         String mention = "",t="";
-        Toast.makeText(getApplicationContext(), write.getText().toString(), Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), write.getText().toString(), Toast.LENGTH_LONG).show();
        for(int i=0;i<co;i++)
         {
             if(write.getText().toString().contains(names[i]))
@@ -207,19 +223,20 @@ send.setOnClickListener(new View.OnClickListener() {
                 long ryu=ru.nextInt(10000000);
                 // append a string into StringBuilder input1
                 input1.append(se[0]);
-               Toast.makeText(getApplicationContext(),gh,Toast.LENGTH_LONG).show();
+              // Toast.makeText(getApplicationContext(),gh,Toast.LENGTH_LONG).show();
                 // reverse StringBuilder input1
 
                 String main=write.getText().toString();
                 String m="";
                 if(!finalMain.equals("No"))
                    m= main.replace(finalMain,"");
+                else m=main;
 
                 CommnetsData cd = new CommnetsData(name, email,m , finalMain, url, cday + " " + finalMonth + " " + cy + " " + time);
                 HashMap op = new HashMap();
                 op.put("Clicked", "No");
                 FirebaseDatabase.getInstance().getReference("Comments").
-                       child(cday + " " + finalMonth + " " + cy + " " + gh).child(ryu+"").setValue(cd);
+                       child(cday + " " + finalMonth + " " + cy + " " + gh).child(cday + " " + finalMonth + " " + cy + " " + time).setValue(cd);
                 NotiData nd = new NotiData(blood, patient,disease ,
                         location, phone, cday + " " + finalMonth + " " + cy, url, name, email, dis, name + " commented on your post", time, name, gh + "");
                 FirebaseDatabase.getInstance().getReference("Users").child(email2).child("Clicked").child(cday + " " + finalMonth + " " + cy + " " + time).setValue(op);

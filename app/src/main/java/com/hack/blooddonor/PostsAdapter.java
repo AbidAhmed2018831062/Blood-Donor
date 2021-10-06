@@ -124,7 +124,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.Posts> {
                         putExtra("Dis",list.get(i).getDistrict()).putExtra("Div",list.get(i).getDivision())
                         .putExtra("Blood",list.get(i).getBlood()).putExtra("Patient",list.get(i).getPatientName())
                         .putExtra("Pat",list.get(i).getPhone()).putExtra("Location",list.get(i).getLocation())
-                        .putExtra("Url",list.get(i).getUrl())   .putExtra("Disease",list.get(i).getDisease()));
+                        .putExtra("Url",list.get(i).getUrl())   .putExtra("Disease",list.get(i).getDisease()) .putExtra("Noti","No"));
             }
         });
         holder.call.setOnClickListener(new View.OnClickListener() {

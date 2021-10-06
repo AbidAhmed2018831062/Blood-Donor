@@ -26,6 +26,7 @@ NotiAdapter adapter;
 String email;
 ImageView back;
 List<NotiData> list=new ArrayList<>();
+List<NotiData> list1=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,7 @@ List<NotiData> list=new ArrayList<>();
             }
         });
 noti.setLayoutManager(new LinearLayoutManager(this));
-adapter=new NotiAdapter(this,list);
+adapter=new NotiAdapter(this,list1);
 noti.setAdapter(adapter);
         final SessionManager sh=new SessionManager(this,SessionManager.USERSESSION);
         HashMap<String,String> hm=sh.returnData();
@@ -55,11 +56,14 @@ noti.setAdapter(adapter);
         FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Notifications").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
                  for(DataSnapshot s:snapshot.getChildren())
                  {
                      NotiData pd=s.getValue(NotiData.class);
                      list.add(pd);
                  }
+                for(int i=list.size()-1;i>=0;i--)
+                    list1.add(list.get(i));
 
                  adapter.notifyDataSetChanged();
             }

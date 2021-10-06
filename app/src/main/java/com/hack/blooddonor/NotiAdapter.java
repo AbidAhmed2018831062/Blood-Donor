@@ -1,5 +1,6 @@
 package com.hack.blooddonor;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -40,7 +41,7 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.Notifi> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Notifi holder, int i) {
+    public void onBindViewHolder(@NonNull Notifi holder, @SuppressLint("RecyclerView") int i) {
         SessionManager sh = new SessionManager(c, SessionManager.USERSESSION);
         HashMap<String, String> hm = sh.returnData();
         String email = hm.get(SessionManager.EMAIL);
@@ -55,7 +56,7 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.Notifi> {
 
 
         }
-       Toast.makeText(c, donor, Toast.LENGTH_LONG).show();
+     //  Toast.makeText(c, donor, Toast.LENGTH_LONG).show();
         FirebaseDatabase.getInstance().getReference("Users").child(email1).child("Clicked").child(list.get(i).getDate()+" "+list.get(i).getTime()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -97,11 +98,11 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.Notifi> {
                 else
                 {
                     c.startActivity(new Intent(c,Comment.class).putExtra("Date",list.get(i).getDate()).
-                            putExtra("Gh",list.get(i).getTime()).putExtra("Email",list.get(i).getEmail()).
+                            putExtra("Gh",list.get(i).getGh()).putExtra("Email",list.get(i).getEmail()).
                             putExtra("Dis",list.get(i).getDistrict()).putExtra("Div",list.get(i).getDivision())
                             .putExtra("Blood",list.get(i).getBlood()).putExtra("Patient",list.get(i).getPatientName())
                             .putExtra("Pat",list.get(i).getPhone()).putExtra("Location",list.get(i).getLocation())
-                            .putExtra("Url",list.get(i).getUrl())   .putExtra("Disease",list.get(i).getDisease()));
+                            .putExtra("Url",list.get(i).getUrl()) .putExtra("Disease",list.get(i).getDisease()) .putExtra("Noti",list.get(i).getTime()));
                 }
             }
         });
